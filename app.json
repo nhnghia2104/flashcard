@@ -8,5 +8,8 @@
     "assetBundlePatterns": [
       "**/*"
     ]
+  },
+  "splash": {
+    "backgroundColor": "#368cfc"
   }
 }
