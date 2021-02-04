@@ -8,10 +8,9 @@ import {
 } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
-import HomeScreen from "./HomeScreen";
-import DetailScreen from "./DetailsScreen";
+import DetailScreen from "./Details/DetailsScreen";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
-import HomeStackScreen from "./HomeStackScreen";
+import HomeStackScreen from "./Home/HomeStackScreen";
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -22,15 +21,15 @@ function MainAppTabs() {
       activeColor="#fff"
       shifting={true}
       labeled={false}
+      lazy={true}
     >
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
+        removeClippedSubviews={true}
         options={{
           tabBarColor: "#368cfc",
           tabBarIcon: ({ color }) => (
-            // <MaterialCommunityIcons name="home" color={color} size={26} />
-            // <Icon name="ios-home" size={26} color={color}></Icon>
             <Image
               source={require("../assets/icon/home/home.png")}
               style={{
@@ -49,8 +48,14 @@ function MainAppTabs() {
           tabBarLabel: "",
           tabBarColor: "#219653",
           tabBarIcon: ({ color }) => (
-            // <MaterialCommunityIcons name="search" color={color} size={26} />
-            <Icon name="ios-add" size={26} color={color}></Icon>
+            <Image
+              source={require("../assets/icon/cardset_plus/cardset_plus.png")}
+              style={{
+                tintColor: color,
+                width: 26,
+                height: 26,
+              }}
+            />
           ),
         }}
         listeners={({ navigation }) => ({
@@ -67,8 +72,14 @@ function MainAppTabs() {
           tabBarLabel: "",
           tabBarColor: "#219653",
           tabBarIcon: ({ color }) => (
-            // <MaterialCommunityIcons name="search" color={color} size={26} />
-            <Icon name="ios-search" size={26} color={color}></Icon>
+            <Image
+              source={require("../assets/icon/search/search.png")}
+              style={{
+                tintColor: color,
+                width: 26,
+                height: 26,
+              }}
+            />
           ),
         }}
       />
@@ -93,7 +104,10 @@ const DetailStackScreen = ({ navigation }) => (
       },
     }}
   >
-    <DetailStack.Screen name="Home" component={HomeScreen}></DetailStack.Screen>
+    <DetailStack.Screen
+      name="Home"
+      component={HomeStackScreen}
+    ></DetailStack.Screen>
   </DetailStack.Navigator>
 );
 

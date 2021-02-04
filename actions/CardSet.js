@@ -47,11 +47,21 @@ export function updateCardSetLastAccess(idCardSet: string) {
   };
 }
 
-export function updateCardSetLastIndex(idCardSet: string, index: Number) {
+export function updateCardSetLastIndex(idCardSet, index) {
   return (dispatch: any) => {
     service.updateCardSetLastIndex(idCardSet, index);
     dispatch({
       type: "CARDSET_UPDATE_LASTINDEX",
+    });
+    dispatch(getAllCardSet());
+  };
+}
+
+export function updateCardSetInfo(idCardSet, cards, title) {
+  return (dispatch: any) => {
+    service.updateCardSetInfo(idCardSet, cards, title);
+    dispatch({
+      type: "CARDSET_UPDATE_CARDS",
     });
     dispatch(getAllCardSet());
   };
@@ -65,3 +75,13 @@ export function clearAllCardSet() {
 }
 
 // ACTION FOR CARDs
+
+export function pushNewCard(idCardSet, card) {
+  return (dispatch: any) => {
+    service.pushNewCard(idCardSet, card);
+    dispatch({
+      type: "CARD_PUSH",
+    });
+    dispatch(getAllCardSet());
+  };
+}

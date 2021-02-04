@@ -6,9 +6,13 @@ import {
 } from "@react-navigation/stack";
 import { View, Text, Image } from "react-native";
 import HomeScreen from "./HomeScreen";
-import DetailsScreen, { height } from "./DetailsScreen";
-const HomeStack = createStackNavigator();
+import DetailsScreen, { height } from "../Details/DetailsScreen";
+import PushNewCardScreen from "../Details/PushNewCardScreen";
+import EditCardScreen from "../Details/EditCardScreen";
 
+const HomeStack = createStackNavigator();
+import { enableScreens } from "react-native-screens";
+enableScreens();
 function HomeStackScreen({ navigation }) {
   return (
     <HomeStack.Navigator
@@ -16,15 +20,6 @@ function HomeStackScreen({ navigation }) {
         gestureEnabled: true,
         gestureDirection: "horizontal",
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        headerStyle: {
-          backgroundColor: "#368cfc",
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
       }}
     >
       <HomeStack.Screen
@@ -39,6 +34,24 @@ function HomeStackScreen({ navigation }) {
         component={DetailsScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <HomeStack.Screen
+        name="PushCard"
+        component={PushNewCardScreen}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        }}
+      />
+      <HomeStack.Screen
+        name="EditCardSet"
+        component={EditCardScreen}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         }}
       />
     </HomeStack.Navigator>

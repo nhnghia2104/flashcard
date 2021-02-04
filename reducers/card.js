@@ -28,6 +28,9 @@ export default function cardReducer(
     case "CARDSET_UPDATE_LASTINDEX": {
       return { ...state, data: action.data };
     }
+    case "CARD_PUSH": {
+      return { ...state, data: action.data };
+    }
   }
   return state;
 }

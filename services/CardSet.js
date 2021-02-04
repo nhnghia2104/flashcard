@@ -116,17 +116,33 @@ class CardSetService {
     }
   }
 
-  updateCardSetLastIndex(idCardSet: string, index: Number) {
+  updateCardSetLastIndex(idCardSet, index) {
     let context = realm.current();
     try {
       let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
-      console.log(idCardSet);
       if (setCards.length == 0) {
         return;
       }
 
       context.write(() => {
         setCards[0].lastIndex = index;
+      });
+    } finally {
+      context.close();
+    }
+  }
+
+  updateCardSetInfo(idCardSet, cards, title) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      if (setCards.length == 0) {
+        return;
+      }
+
+      context.write(() => {
+        setCards[0].cards = cards;
+        setCards[0].name = title;
       });
     } finally {
       context.close();
@@ -150,6 +166,24 @@ class CardSetService {
       let setCards = context.objects("CardSet");
       context.write(() => {
         context.delete(setCards);
+      });
+    } finally {
+      context.close();
+    }
+  }
+
+  // ACTION FOR CARD
+  pushNewCard(idCardSet, card) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      console.log(idCardSet);
+      if (setCards.length == 0) {
+        return;
+      }
+
+      context.write(() => {
+        setCards[0].cards.unshift(card);
       });
     } finally {
       context.close();

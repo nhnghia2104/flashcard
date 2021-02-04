@@ -11,4 +11,6 @@ export type Action =
   | { type: "CARDSET_CLEAR_ALL" }
   | { type: "CARDSET_ADD" }
   | { type: "CARDSET_UPDATE_LASTACCESS" }
-  | { type: "CARDSET_UPDATE_LASTINDEX" };
+  | { type: "CARDSET_UPDATE_LASTINDEX" }
+  | { type: "CARDSET_UPDATE_CARDS" }
+  | { type: "CARD_PUSH" };
