@@ -28,7 +28,7 @@ function MainAppTabs() {
         component={HomeStackScreen}
         removeClippedSubviews={true}
         options={{
-          tabBarColor: "#368cfc",
+          tabBarColor: "#02c39a",
           tabBarIcon: ({ color }) => (
             <Image
               source={require("../assets/icon/home/home.png")}

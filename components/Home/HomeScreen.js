@@ -20,6 +20,7 @@ import {
 import { connect } from "react-redux";
 import realm from "../../realm";
 import type { CardSet } from "../../model/CardSet";
+import LinearGradient from "react-native-linear-gradient";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -70,7 +71,13 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Header
-          backgroundColor="#368cfc"
+          // ViewComponent={LinearGradient}
+          // linearGradientProps={{
+          //   colors: ["#02c39a", "#f0f3bd"],
+          //   start: { x: 0, y: 0.6 },
+          //   end: { x: 0, y: 1 },
+          // }}
+          backgroundColor="#02c39a"
           containerStyle={{
             borderBottomColor: "#368cfc",
             borderBottomWidth: 0,
@@ -140,7 +147,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     minHeight: 100,
-    backgroundColor: "rgba(94, 84, 142, 0.1)",
+    backgroundColor: "rgba(240, 243, 189, 0.4)",
+    // backgroundColor: "#f0f3bd",
     padding: 15,
     borderRadius: 3,
   },

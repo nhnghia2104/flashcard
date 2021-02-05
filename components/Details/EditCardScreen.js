@@ -49,9 +49,9 @@ function EditCardScreen(props) {
         <View style={styles.container}>
           <Header
             barStyle="light-content"
-            backgroundColor="#368cfc"
+            backgroundColor="#02c39a"
             containerStyle={{
-              borderBottomColor: "#368cfc",
+              borderBottomColor: "#02c39a",
               borderBottomWidth: 0,
               zIndex: 1000,
             }}

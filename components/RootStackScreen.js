@@ -28,7 +28,7 @@ function RootStackScreen(props) {
   return (
     <Provider store={store}>
       <PaperProvider>
-        <StatusBar backgroundColor="#368cfc" barStyle="light-content" />
+        <StatusBar translucent={true} barStyle="light-content" />
         <NavigationContainer>
           <RootStack.Navigator
             headerMode="none"

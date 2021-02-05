@@ -78,9 +78,9 @@ const DetailsScreen = (props) => {
     <View style={styles.container}>
       <Header
         barStyle="light-content"
-        backgroundColor="#368cfc"
+        backgroundColor="#02c39a"
         containerStyle={{
-          borderBottomColor: "#368cfc",
+          borderBottomColor: "#02c39a",
           borderBottomWidth: 0,
           zIndex: 1000,
         }}
@@ -116,7 +116,7 @@ const DetailsScreen = (props) => {
       />
       {!loaded && (
         <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#368cfc" />
+          <ActivityIndicator size="large" color="#02c39a" />
         </View>
       )}
       {loaded && props.cardSet && (
@@ -166,34 +166,32 @@ const DetailsScreen = (props) => {
                 style={[styles.actionGroup, { translateY: translateYFlipCard }]}
               >
                 <TouchableOpacity
-                  style={[
-                    styles.buttonContainer,
-                    styles.shadow,
-                    styles.buttonLight,
-                  ]}
+                  style={[styles.buttonContainer]}
                   onPress={() =>
                     props.navigation.push("PushCard", {
                       idCardSet: props.cardSet.id,
                     })
                   }
                 >
-                  <Text style={[styles.buttonText, styles.textBlack]}>ADD</Text>
+                  <Image
+                    style={styles.icon}
+                    source={require("../../assets/icon/stack/stack.png")}
+                  />
+                  <Text style={[styles.buttonText]}>Add new card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[
-                    styles.buttonContainer,
-                    styles.shadow,
-                    styles.buttonLight,
-                  ]}
+                  style={[styles.buttonContainer]}
                   onPress={() =>
                     props.navigation.push("EditCardSet", {
                       idCardSet: props.cardSet.id,
                     })
                   }
                 >
-                  <Text style={[styles.buttonText, styles.textBlack]}>
-                    EDIT
-                  </Text>
+                  <Image
+                    style={styles.icon}
+                    source={require("../../assets/icon/learn/learn.png")}
+                  />
+                  <Text style={[styles.buttonText]}>Learn</Text>
                 </TouchableOpacity>
               </Animated.View>
               <Text style={styles.textHeaderList}>
@@ -292,7 +290,7 @@ const FlipCardItem = ({ item, index, scrollX }) => {
           <Text style={styles.textBlack}>{item.data.front.text}</Text>
           <IconButton
             onPress={() => console.log("front")}
-            color="#368cfc"
+            color="#02c39a"
             style={styles.buttonZoom}
             icon={require("../../assets/icon/zoom/zoom.png")}
           />
@@ -302,7 +300,7 @@ const FlipCardItem = ({ item, index, scrollX }) => {
           <Text style={styles.textBlack}>{item.data.back.text}</Text>
           <IconButton
             onPress={() => console.log("back")}
-            color="#368cfc"
+            color="#02c39a"
             style={styles.buttonZoom}
             icon={require("../../assets/icon/zoom/zoom.png")}
           />
@@ -339,7 +337,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backGroundView: {
-    backgroundColor: "#368cfc",
+    backgroundColor: "#02c39a",
     width: width,
     height: (height * 0.35) / 2,
     position: "absolute",
@@ -376,7 +374,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  shadow: {
+  buttonText: {
+    fontSize: 14,
+    color: "#333333",
+    alignSelf: "center",
+    fontWeight: "bold",
+  },
+  buttonContainer: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -385,27 +389,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: "#fff",
-    alignSelf: "center",
-    fontWeight: "600",
-    textTransform: "uppercase",
-  },
-  buttonContainer: {
-    // elevation: 8,
-    backgroundColor: "#368cfc",
-    borderRadius: 5,
-    width: 150,
-    // margin: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    minWidth: 110,
-  },
-  buttonLight: {
+
     backgroundColor: "#fff",
-    color: "#333333",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    marginHorizontal: "auto",
+    borderBottomWidth: 5,
+    borderColor: "#F0F3BD",
+    width: "47%",
+    // flex: 1,
+  },
+  actionGroup: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   flatListCard: {
     paddingBottom: 10,
@@ -451,17 +451,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     textAlignVertical: "center",
-    color: "#368cfc",
+    color: "#02c39a",
   },
   buttonZoom: {
     position: "absolute",
     bottom: 0,
     right: 0,
   },
-  actionGroup: {
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
+
   textHeaderList: {
     fontSize: 16,
     color: "#333333",
@@ -484,8 +481,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
-    // paddingTop: 10,
-    // paddingBottom: 10,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    tintColor: "#02C39A",
+    marginBottom: 5,
   },
 });
 
