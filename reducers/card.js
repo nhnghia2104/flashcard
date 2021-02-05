@@ -31,6 +31,12 @@ export default function cardReducer(
     case "CARD_PUSH": {
       return { ...state, data: action.data };
     }
+    case "CARD_UPDATE_IN_CARDSET": {
+      return { ...state, data: action.data };
+    }
+    case "CARD_REMOVE_FROM_CARDSET": {
+      return { ...state, data: action.data };
+    }
   }
   return state;
 }

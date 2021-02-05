@@ -189,6 +189,42 @@ class CardSetService {
       context.close();
     }
   }
+
+  updateCardInCardSet(idCardSet, card, index) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      console.log(idCardSet);
+      if (setCards.length == 0) {
+        return;
+      }
+      context.write(() => {
+        if (setCards[0].cards[index]) {
+          setCards[0].cards[index] = card;
+        }
+      });
+    } finally {
+      context.close();
+    }
+  }
+
+  removeCardInCardSet(idCardSet, index) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      console.log(idCardSet);
+      if (setCards.length == 0) {
+        return;
+      }
+      context.write(() => {
+        if (setCards[0].cards[index]) {
+          setCards[0].cards.splice(index, 1);
+        }
+      });
+    } finally {
+      context.close();
+    }
+  }
 }
 
 module.exports = CardSetService;

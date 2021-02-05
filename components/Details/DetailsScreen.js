@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { render } from "react-dom";
 import {
   View,
@@ -10,18 +10,21 @@ import {
   ScrollView,
   Animated,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { Header, Button } from "react-native-elements";
 import { connect } from "react-redux";
 import {
   updateCardSetLastAccess,
   updateCardSetLastIndex,
+  removeCardInCardSet,
 } from "../../actions/CardSet";
 import { IconButton } from "react-native-paper";
 import type { CardSet } from "../../model/CardSet";
 import FlipCard from "react-native-flip-card";
 import ProgressBar from "react-native-progress/Bar";
 import * as Animatable from "react-native-animatable";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -111,6 +114,11 @@ const DetailsScreen = (props) => {
           />
         )}
       />
+      {!loaded && (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#368cfc" />
+        </View>
+      )}
       {loaded && props.cardSet && (
         <FlatList
           ListHeaderComponent={
@@ -124,7 +132,9 @@ const DetailsScreen = (props) => {
                     },
                   ]}
                 >
-                  <View style={styles.backGroundView}></View>
+                  {props.cardSet.cards.length != 0 && (
+                    <View style={styles.backGroundView}></View>
+                  )}
                   <Animated.FlatList
                     style={styles.flatListCard}
                     data={props.cardSet.cards}
@@ -194,8 +204,8 @@ const DetailsScreen = (props) => {
           data={props.cardSet.cards}
           renderItem={({ item, index }) => renderListCard({ item, index })}
           keyExtractor={keyExtractorListCardItem}
-          initialNumToRender={3}
-          maxToRenderPerBatch={1}
+          // initialNumToRender={3}
+          // maxToRenderPerBatch={1}
           removeClippedSubviews={true}
           disableVirtualization={true}
         />
@@ -208,22 +218,47 @@ const { width, height } = Dimensions.get("window");
 const TICKER_HEIGHT = 20;
 
 const CardItem = ({ item, index, props }) => {
+  const _swipe = useRef(null);
+
+  const removeAction = (index) => {
+    _swipe.current.close();
+    props.dispatch(removeCardInCardSet(props.cardSet.id, index));
+  };
+  const swipeAction = (index) => {
+    return (
+      <TouchableOpacity onPress={() => removeAction(index)}>
+        <View style={styles.deleteBox}>
+          <Image
+            source={require("../../assets/icon/delete/delete.png")}
+            style={{ tintColor: "#fff", width: 28, height: 28 }}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
   return (
     <TouchableOpacity
       onPress={() =>
         props.navigation.push("EditCardSet", {
           idCardSet: props.cardSet.id,
+          index: index,
         })
       }
+      activeOpacity={1}
     >
-      <View style={styles.item}>
-        <Text style={styles.textTerm}>{item.data.front.text}</Text>
-        <Text style={styles.textDefinition}>{item.data.back.text}</Text>
-      </View>
+      <Swipeable
+        overshootRight={false}
+        renderRightActions={() => swipeAction(index)}
+        ref={_swipe}
+      >
+        <View style={styles.item}>
+          <Text style={styles.textTerm}>{item.data.front.text}</Text>
+          <Text style={styles.textDefinition}>{item.data.back.text}</Text>
+        </View>
+      </Swipeable>
     </TouchableOpacity>
   );
 };
-
 const FlipCardItem = ({ item, index, scrollX }) => {
   const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
   const inputRangeOpacity = [
@@ -382,16 +417,16 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#fff",
-    margin: 10,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
     borderColor: "gray",
     borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
   },
   textTerm: {
     color: "#333333",
     fontSize: 15,
-    fontWeight: "700",
+    // fontWeight: "700",
     marginBottom: 8,
   },
   textDefinition: {
@@ -432,7 +467,25 @@ const styles = StyleSheet.create({
     color: "#333333",
     fontWeight: "bold",
     margin: 20,
-    marginBottom: 0,
+    marginBottom: 15,
+  },
+  loading: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteBox: {
+    backgroundColor: "#e01e37",
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    // paddingTop: 10,
+    // paddingBottom: 10,
   },
 });
 

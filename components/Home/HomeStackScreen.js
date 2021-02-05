@@ -49,9 +49,7 @@ function HomeStackScreen({ navigation }) {
         name="EditCardSet"
         component={EditCardScreen}
         options={{
-          gestureEnabled: false,
           headerShown: false,
-          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         }}
       />
     </HomeStack.Navigator>

@@ -8,134 +8,119 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Header, Input } from "react-native-elements";
 import { IconButton } from "react-native-paper";
-import { updateCardSetInfo } from "../../actions/CardSet";
+import { updateCardInCardSet } from "../../actions/CardSet";
 
-const DissmissKeyboard = ({ children }) => (
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    {children}
-  </TouchableWithoutFeedback>
-);
 function EditCardScreen(props) {
-  const [listCard, updateListCard] = useState([]);
-  const [title, updateTitle] = useState("");
+  const [index, setIndex] = useState(0);
+  const [front, setFront] = useState("");
+  const [back, setBack] = useState("");
+  const [card, updateCard] = useState(null);
   useEffect(() => {
-    if (props.cardSet) {
-      const tempArr = [...props.cardSet.cards];
-      updateListCard(tempArr);
-      updateTitle(props.cardSet.name);
-      console.log(props.cardSet.cards[0].data.front.text);
-    }
-    return () => {
-      console.log(props.cardSet.cards[0].data.front.text);
-    };
+    var index = props.route.params.index;
+    setIndex(index);
+    updateCard(props.card);
+    console.log(props.card);
+    return () => {};
   }, []);
   const handleSubmit = () => {
-    if (title != "") {
-      props.dispatch(updateCardSetInfo(props.cardSet.id, listCard, title));
-      props.navigation.pop();
-    }
+    let idCardSet = props.route.params.idCardSet;
+    let index = props.route.params.index;
+    props.dispatch(updateCardInCardSet(idCardSet, card, index));
+    props.navigation.pop();
   };
-  const updateFront = (index, text) => {
-    const newArr = [...props.cardSet.cards];
-    if (newArr[index]) {
-      newArr[index].data.front.text = text;
-      updateListCard(newArr);
+  const cardValueChanged = (text, isFront) => {
+    let temp = { ...card };
+    if (isFront) {
+      temp.data.front.text = text;
+    } else {
+      temp.data.back.text = text;
     }
+    updateCard(temp);
+    console.log(card);
   };
-  const updateBack = (index, text) => {
-    var newArr = [...props.cardSet.cards];
-    if (newArr[index]) {
-      newArr[index].data.back.text = text;
-      updateListCard(newArr);
-    }
-  };
-  const renderItem = useCallback(
-    ({ item, index }) => (
-      <View style={[styles.viewInput]}>
-        <Text style={styles.labelForInput}>frontside</Text>
-        <TextInput
-          style={styles.textInputStyle}
-          onChangeText={(text) => updateFront(index, text)}
-          defaultValue={item.data.front.text}
-        />
-        <Text style={styles.labelForInput}>backside</Text>
-        <TextInput
-          style={styles.textInputStyle}
-          onChangeText={(text) => updateBack(index, text)}
-          defaultValue={item.data.back.text}
-        />
-      </View>
-    ),
-    []
-  );
-  const keyExtractor = useCallback((item, index) => index.toString());
-
   return (
-    <DissmissKeyboard>
-      <View style={[styles.container]}>
-        <Header
-          barStyle="dark-content"
-          backgroundColor="#fff"
-          containerStyle={{
-            borderBottomColor: "#368cfc",
-            borderBottomWidth: 0,
-            zIndex: 1000,
-          }}
-          leftComponent={() => (
-            <IconButton
-              color="#368cfc"
-              icon={require("../../assets/icon/ios_back/ios_back.png")}
-              onPress={() => props.navigation.pop()}
-            />
-          )}
-          centerComponent={() => (
-            <Text
-              numberOfLines={1}
-              style={{
-                textAlign: "center",
-                color: "#368cfc",
-                fontSize: 16,
-                height: "100%",
-                textAlignVertical: "center",
-                flex: 1,
-              }}
-            >
-              SET
-            </Text>
-          )}
-          rightComponent={() => (
-            <IconButton
-              color="#368cfc"
-              icon={require("../../assets/icon/more_hor/more_hor.png")}
-              onPress={handleSubmit}
-            />
-          )}
-        />
-        {props.cardSet.cards && (
-          <FlatList
-            data={props.cardSet.cards}
-            renderItem={({ item, index }) => renderItem({ item, index })}
-            keyExtractor={keyExtractor}
-            style={styles.flatList}
-            removeClippedSubviews={true}
-            disableVirtualization={true}
-            ListHeaderComponent={
-              <View style={{ marginRight: 20, marginLeft: 20 }}>
-                <Text style={styles.labelForInput}>title</Text>
-                <TextInput
-                  style={styles.textInputStyle}
-                  onChangeText={(text) => updateTitle(text)}
-                  defaultValue={props.cardSet.name}
-                />
-              </View>
-            }
+    <ScrollView>
+      {card != null && (
+        <View style={styles.container}>
+          <Header
+            barStyle="light-content"
+            backgroundColor="#368cfc"
+            containerStyle={{
+              borderBottomColor: "#368cfc",
+              borderBottomWidth: 0,
+              zIndex: 1000,
+            }}
+            leftComponent={() => (
+              <IconButton
+                color="#fff"
+                icon={require("../../assets/icon/ios_back/ios_back.png")}
+                onPress={() => props.navigation.pop()}
+              />
+            )}
+            centerComponent={() => (
+              <Text
+                numberOfLines={1}
+                style={{
+                  textAlign: "center",
+                  color: "#fff",
+                  fontSize: 16,
+                  height: "100%",
+                  textAlignVertical: "center",
+                  flex: 1,
+                }}
+              >
+                EDIT
+              </Text>
+            )}
+            rightComponent={() => (
+              <TouchableOpacity
+                style={{ flex: 1, marginRight: 12 }}
+                onPress={handleSubmit}
+              >
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    height: "100%",
+                    fontWeight: "bold",
+                    textAlignVertical: "center",
+                    flex: 1,
+                  }}
+                >
+                  Done
+                </Text>
+              </TouchableOpacity>
+            )}
           />
-        )}
-      </View>
-    </DissmissKeyboard>
+          <View style={styles.viewInput}>
+            <Text style={styles.labelForInput}>frontside</Text>
+            <TextInput
+              multiline
+              numberOfLines={4}
+              style={styles.textInputStyle}
+              onChangeText={(text) => cardValueChanged(text, true)}
+              placeholder={"term, question,..."}
+              defaultValue={card.data.front.text}
+            />
+            <Text style={styles.labelForInput}>backside</Text>
+            <TextInput
+              multiline
+              numberOfLines={4}
+              style={styles.textInputStyle}
+              onChangeText={(text) => cardValueChanged(text, false)}
+              placeholder={"definition, answer,..."}
+              defaultValue={card.data.back.text}
+            />
+          </View>
+        </View>
+      )}
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -179,8 +164,13 @@ const styles = StyleSheet.create({
 });
 const selectFromStore = (store, props) => {
   let id = props.route.params.idCardSet;
+  let cardSet = store.data.find((x) => x.id === id);
+  let index = props.route.params.index;
+  let cards = cardSet.cards;
   return {
-    cardSet: store.data.find((x) => x.id === id), // finding card set in list card set by id
+    cardSet: cardSet,
+    card: cards[index],
+    index: index,
   };
 };
 

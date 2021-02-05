@@ -81,13 +81,13 @@ class HomeScreen extends Component {
               Home
             </Text>
           )}
-          // rightComponent={() => (
-          //   <IconButton
-          //     color="#fff"
-          //     icon={require("../../assets/icon/more_hor/more_hor.png")}
-          //     onPress={() => console.log("pressed right")}
-          //   />
-          // )}
+          rightComponent={() => (
+            <IconButton
+              color="#fff"
+              icon={require("../../assets/icon/more_hor/more_hor.png")}
+              onPress={() => console.log("pressed right")}
+            />
+          )}
         />
         <FlatList
           ListHeaderComponent={

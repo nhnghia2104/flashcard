@@ -85,3 +85,23 @@ export function pushNewCard(idCardSet, card) {
     dispatch(getAllCardSet());
   };
 }
+
+export function updateCardInCardSet(idCardSet, card, index) {
+  return (dispatch: any) => {
+    service.updateCardInCardSet(idCardSet, card, index);
+    dispatch({
+      type: "CARD_UPDATE_IN_CARDSET",
+    });
+    dispatch(getAllCardSet());
+  };
+}
+
+export function removeCardInCardSet(idCardSet, index) {
+  return (dispatch: any) => {
+    service.removeCardInCardSet(idCardSet, index);
+    dispatch({
+      type: "CARD_REMOVE_FROM_CARDSET",
+    });
+    dispatch(getAllCardSet());
+  };
+}
