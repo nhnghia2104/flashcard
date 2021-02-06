@@ -97,7 +97,7 @@ const DetailsScreen = (props) => {
       props.dispatch(updateCardSetLastIndex(id, index));
     }
   });
-  // test change email
+
   return (
     <View style={styles.container}>
       <Header

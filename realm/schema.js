@@ -35,7 +35,7 @@ const CardSet = {
     isStarred: "bool",
     lastAccess: "int",
     dateCreated: "int",
-    lastIndex: { type: "float", default: 0 },
+    lastIndex: { type: "int", default: 0 },
     cards: { type: "list", objectType: "Card" },
   },
 };
