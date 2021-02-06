@@ -25,6 +25,7 @@ import FlipCard from "react-native-flip-card";
 import ProgressBar from "react-native-progress/Bar";
 import * as Animatable from "react-native-animatable";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { call } from "react-native-reanimated";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -43,14 +44,19 @@ const DetailsScreen = (props) => {
     if (props.cardSet) {
       props.dispatch(updateCardSetLastAccess(props.cardSet.id));
     }
-
+    // console.log(props.cardSet.lastIndex);
     setTimeout(() => setLoaded(true), 0);
     return () => {};
   }, []);
 
   const renderItem = useCallback(
     ({ item, index, scrollX }) => (
-      <FlipCardItem item={item} index={index} scrollX={scrollX} />
+      <FlipCardItem
+        item={item}
+        index={index}
+        scrollX={scrollX}
+        callback={() => handleZoom(index)}
+      />
     ),
     []
   );
@@ -89,14 +95,18 @@ const DetailsScreen = (props) => {
     viewAreaCoveragePercentThreshold: 50,
     waitForInteraction: true,
   });
-  const onViewCardRef = React.useRef((viewableItems) => {
-    let { changed } = viewableItems;
-    if (changed.length) {
-      let index = changed[0].index;
+  const onViewCardRef = React.useRef(({ viewableItems }) => {
+    console.log(viewableItems);
+    if (viewableItems.length) {
+      let index = viewableItems[0].index;
       let id = props.cardSet.id;
+
       props.dispatch(updateCardSetLastIndex(id, index));
     }
   });
+  const handleZoom = (index) => {
+    props.navigation.push("ZoomScreen", { idCardSet: props.cardSet.id });
+  };
 
   return (
     <View style={styles.container}>
@@ -174,7 +184,7 @@ const DetailsScreen = (props) => {
                     initialScrollIndex={props.cardSet.lastIndex}
                     // initialNumToRender={0}
                     removeClippedSubviews={true}
-                    disableVirtualization={true}
+                    // disableVirtualization={true}
                     keyExtractor={keyExtractorFlipCardItem}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -290,7 +300,7 @@ const CardItem = ({ item, index, props }) => {
     </TouchableOpacity>
   );
 };
-const FlipCardItem = ({ item, index, scrollX }) => {
+const FlipCardItem = ({ item, index, scrollX, callback }) => {
   const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
   const inputRangeOpacity = [
     (index - 0.3) * width,
@@ -322,7 +332,7 @@ const FlipCardItem = ({ item, index, scrollX }) => {
         <View style={[styles.card, { flex: 1, backgroundColor: "#fff" }]}>
           <Text style={styles.textBlack}>{item.data.front.text}</Text>
           <IconButton
-            onPress={() => console.log("front")}
+            onPress={callback}
             color="#02c39a"
             style={styles.buttonZoom}
             icon={require("../../assets/icon/zoom/zoom.png")}

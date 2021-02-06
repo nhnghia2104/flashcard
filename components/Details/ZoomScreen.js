@@ -12,6 +12,7 @@ import {
 import FlipCard from "react-native-flip-card";
 import { connect } from "react-redux";
 import { IconButton } from "react-native-paper";
+import { updateCardSetLastIndex } from "../../actions/CardSet";
 function ZoomScreen(props) {
   const [loaded, setLoaded] = useState(false);
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -22,6 +23,19 @@ function ZoomScreen(props) {
     ({ item, index }) => <FlipCardItem item={item} index={index} />,
     []
   );
+  const _viewabilityConfig = React.useRef({
+    viewAreaCoveragePercentThreshold: 50,
+    waitForInteraction: true,
+  });
+  const onViewCardRef = React.useRef(({ viewableItems }) => {
+    console.log(viewableItems);
+    if (viewableItems.length) {
+      let index = viewableItems[0].index;
+      let id = props.cardSet.id;
+
+      props.dispatch(updateCardSetLastIndex(id, index));
+    }
+  });
   const keyExtractor = useCallback((item, index) => index.toString());
   return (
     <View style={styles.container}>
@@ -48,7 +62,9 @@ function ZoomScreen(props) {
               flex: 1,
             }}
           >
-            <Ticker scrollX={scrollX} data={props.cardSet.cards} />
+            {loaded && props.cardSet && (
+              <Ticker scrollX={scrollX} data={props.cardSet.cards} />
+            )}
           </View>
         )}
         rightComponent={() => (
@@ -69,6 +85,15 @@ function ZoomScreen(props) {
           data={props.cardSet.cards}
           renderItem={({ item, index }) => renderItem({ item, index })}
           keyExtractor={keyExtractor}
+          getItemLayout={(data, index) => ({
+            length: width,
+            offset: width * index,
+            index,
+          })}
+          onViewableItemsChanged={onViewCardRef.current}
+          viewabilityConfig={_viewabilityConfig.current}
+          initialScrollIndex={props.cardSet.lastIndex}
+          removeClippedSubviews={true}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -126,12 +151,6 @@ const Ticker = ({ scrollX, data, opacity }) => {
       </Animated.View>
     </View>
   );
-};
-const selectFromStore = (store, props) => {
-  let id = "1611681227828"; // props.route.params.idCardSet;
-  return {
-    cardSet: store.data.find((x) => x.id === id), // finding card set in list card set by id
-  };
 };
 
 const styles = StyleSheet.create({
@@ -197,5 +216,11 @@ const styles = StyleSheet.create({
     color: "#4F4F4F",
   },
 });
+const selectFromStore = (store, props) => {
+  let id = props.route.params.idCardSet;
+  return {
+    cardSet: store.data.find((x) => x.id === id), // finding card set in list card set by id
+  };
+};
 
 export default connect(selectFromStore)(ZoomScreen);
