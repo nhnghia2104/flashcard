@@ -35,15 +35,19 @@ type Props = {
 const DetailsScreen = (props) => {
   var lastIndex = 0;
   const [loaded, setLoaded] = useState(false);
+  const [firstChange, setFirstChange] = useState(true);
+  const _flatListFlipCard = React.createRef();
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const slideDown = React.useRef(new Animated.Value(0)).current;
   useEffect(() => {
     if (props.cardSet) {
       props.dispatch(updateCardSetLastAccess(props.cardSet.id));
     }
+
     setTimeout(() => setLoaded(true), 0);
     return () => {};
   }, []);
+
   const renderItem = useCallback(
     ({ item, index, scrollX }) => (
       <FlipCardItem item={item} index={index} scrollX={scrollX} />
@@ -72,6 +76,26 @@ const DetailsScreen = (props) => {
   const translateYFlipCard = slideDown.interpolate({
     inputRange: [0, 1],
     outputRange: [-height * 0.35, 0],
+  });
+
+  const scrollToIndex = () => {
+    _flatListFlipCard.current.scrollToIndex({
+      animated: true,
+      index: 1,
+      viewPosition: 0.5,
+    });
+  };
+  const _viewabilityConfig = React.useRef({
+    viewAreaCoveragePercentThreshold: 50,
+    waitForInteraction: true,
+  });
+  const onViewCardRef = React.useRef((viewableItems) => {
+    let { changed } = viewableItems;
+    if (changed.length) {
+      let index = changed[0].index;
+      let id = props.cardSet.id;
+      props.dispatch(updateCardSetLastIndex(id, index));
+    }
   });
 
   return (
@@ -110,7 +134,7 @@ const DetailsScreen = (props) => {
           <IconButton
             color="#fff"
             icon={require("../../assets/icon/more_hor/more_hor.png")}
-            onPress={() => console.log("pressed right")}
+            onPress={scrollToIndex}
           />
         )}
       />
@@ -136,13 +160,19 @@ const DetailsScreen = (props) => {
                     <View style={styles.backGroundView}></View>
                   )}
                   <Animated.FlatList
+                    ref={_flatListFlipCard}
                     style={styles.flatListCard}
                     data={props.cardSet.cards}
                     renderItem={({ item, index }) =>
                       renderItem({ item, index, scrollX })
                     }
-                    initialNumToRender={0}
-                    maxToRenderPerBatch={1}
+                    getItemLayout={(data, index) => ({
+                      length: width,
+                      offset: width * index,
+                      index,
+                    })}
+                    initialScrollIndex={props.cardSet.lastIndex}
+                    // initialNumToRender={0}
                     removeClippedSubviews={true}
                     disableVirtualization={true}
                     keyExtractor={keyExtractorFlipCardItem}
@@ -153,6 +183,8 @@ const DetailsScreen = (props) => {
                       [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                       { useNativeDriver: true }
                     )}
+                    onViewableItemsChanged={onViewCardRef.current}
+                    viewabilityConfig={_viewabilityConfig.current}
                     scrollEventThrottle={16}
                   />
                   <Ticker
@@ -162,37 +194,38 @@ const DetailsScreen = (props) => {
                   />
                 </Animated.View>
               )}
-              <Animated.View
-                style={[styles.actionGroup, { translateY: translateYFlipCard }]}
-              >
-                <TouchableOpacity
-                  style={[styles.buttonContainer]}
-                  onPress={() =>
-                    props.navigation.push("PushCard", {
-                      idCardSet: props.cardSet.id,
-                    })
-                  }
-                >
-                  <Image
-                    style={styles.icon}
-                    source={require("../../assets/icon/stack/stack.png")}
-                  />
-                  <Text style={[styles.buttonText]}>Add new card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.buttonContainer]}
-                  onPress={() =>
-                    props.navigation.push("EditCardSet", {
-                      idCardSet: props.cardSet.id,
-                    })
-                  }
-                >
-                  <Image
-                    style={styles.icon}
-                    source={require("../../assets/icon/learn/learn.png")}
-                  />
-                  <Text style={[styles.buttonText]}>Learn</Text>
-                </TouchableOpacity>
+              <Animated.View style={{ translateY: translateYFlipCard }}>
+                <Text style={[styles.setCardName]}>{props.cardSet.name}</Text>
+                <View style={[styles.actionGroup]}>
+                  <TouchableOpacity
+                    style={[styles.buttonContainer]}
+                    onPress={() =>
+                      props.navigation.push("PushCard", {
+                        idCardSet: props.cardSet.id,
+                      })
+                    }
+                  >
+                    <Image
+                      style={styles.icon}
+                      source={require("../../assets/icon/stack/stack.png")}
+                    />
+                    <Text style={[styles.buttonText]}>Add new card</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[styles.buttonContainer]}
+                    onPress={() =>
+                      props.navigation.push("EditCardSet", {
+                        idCardSet: props.cardSet.id,
+                      })
+                    }
+                  >
+                    <Image
+                      style={styles.icon}
+                      source={require("../../assets/icon/learn/learn.png")}
+                    />
+                    <Text style={[styles.buttonText]}>Learn</Text>
+                  </TouchableOpacity>
+                </View>
               </Animated.View>
               <Text style={styles.textHeaderList}>
                 Card in this set ({props.cardSet.cards.length})
@@ -353,6 +386,13 @@ const styles = StyleSheet.create({
   flipCardArea: {
     minHeight: height * 0.35,
     width: width,
+  },
+  setCardName: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginHorizontal: 20,
+    marginVertical: 10,
+    color: "#333333",
   },
   textNumberCard: {
     fontSize: 16,

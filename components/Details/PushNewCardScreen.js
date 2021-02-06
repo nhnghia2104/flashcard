@@ -73,16 +73,16 @@ class PushNewCardScreen extends React.Component {
         <ScrollView>
           <View style={styles.container}>
             <Header
-              barStyle="dark-content"
-              backgroundColor="#fff"
+              barStyle="light-content"
+              backgroundColor="#02c39a"
               containerStyle={{
-                borderBottomColor: "#368cfc",
+                borderBottomColor: "#fff",
                 borderBottomWidth: 0,
                 zIndex: 1000,
               }}
               leftComponent={() => (
                 <IconButton
-                  color="#368cfc"
+                  color="#fff"
                   icon={require("../../assets/icon/ios_back/ios_back.png")}
                   onPress={() => this.props.navigation.pop()}
                 />
@@ -92,7 +92,7 @@ class PushNewCardScreen extends React.Component {
                   numberOfLines={1}
                   style={{
                     textAlign: "center",
-                    color: "#368cfc",
+                    color: "#fff",
                     fontSize: 16,
                     height: "100%",
                     textAlignVertical: "center",
@@ -110,7 +110,7 @@ class PushNewCardScreen extends React.Component {
                   <Text
                     numberOfLines={1}
                     style={{
-                      color: "#368cfc",
+                      color: "#fff",
                       fontSize: 16,
                       height: "100%",
                       fontWeight: "bold",

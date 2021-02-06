@@ -22,6 +22,7 @@ import { Provider } from "react-redux";
 import store from "../store";
 import MainAppTabs from "./MainAppTabs";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
+import ZoomScreen from "./Details/ZoomScreen";
 const Drawer = createDrawerNavigator();
 const RootStack = createStackNavigator();
 function RootStackScreen(props) {
@@ -38,6 +39,11 @@ function RootStackScreen(props) {
             <RootStack.Screen
               name="AddNewCardSet"
               component={AddNewCardSetScreen}
+              options={{ animationEnabled: true }}
+            />
+            <RootStack.Screen
+              name="ZoomScreen"
+              component={ZoomScreen}
               options={{ animationEnabled: true }}
             />
           </RootStack.Navigator>

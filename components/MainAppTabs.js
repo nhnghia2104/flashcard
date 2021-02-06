@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DetailScreen from "./Details/DetailsScreen";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
 import HomeStackScreen from "./Home/HomeStackScreen";
+import ZoomScreen from "./Details/ZoomScreen";
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -67,7 +68,7 @@ function MainAppTabs() {
       />
       <Tab.Screen
         name="Huhu"
-        component={DetailStackScreen}
+        component={ZoomScreen}
         options={{
           tabBarLabel: "",
           tabBarColor: "#219653",
@@ -82,6 +83,12 @@ function MainAppTabs() {
             />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault();
+            navigation.navigate("ZoomScreen");
+          },
+        })}
       />
     </Tab.Navigator>
   );
