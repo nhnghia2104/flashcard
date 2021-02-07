@@ -9,12 +9,26 @@ class CardSetService {
       if (setCards.length > 0) {
         return;
       }
-      var defaultTestData = require("../testData.json");
+      // var defaultTestData = require("../testData.json");
+      fetch("http://www.json-generator.com/api/json/get/ceUpnFDHOq?indent=2", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((json) => this.initDefaultData(json))
+        .catch((error) => console.log(error));
+    } finally {
+      context.close();
+    }
+  }
+
+  initDefaultData(defaultTestData) {
+    let context = realm.current();
+    try {
       for (var i = 0; i < defaultTestData.length; i++) {
         var setCard = defaultTestData[i];
         context.write(() => {
           context.create("CardSet", {
-            id: setCard.id,
+            id: setCard.id.toString(),
             name: setCard.name,
             isStarred: setCard.isStarred,
             lastAccess: setCard.lastAccess,
