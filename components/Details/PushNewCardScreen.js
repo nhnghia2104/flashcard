@@ -31,7 +31,7 @@ const DissmissKeyboard = ({ children }) => (
 );
 @connect((store) => {
   return {
-    setCards: store.data,
+    setCards: store.card.data,
   };
 })
 class PushNewCardScreen extends React.Component {

@@ -28,7 +28,7 @@ type Props = {
 };
 @connect((store) => {
   return {
-    setCards: store.data,
+    setCards: store.card.data,
   };
 })
 class HomeScreen extends Component {

@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
 });
 const selectFromStore = (store, props) => {
   let id = props.route.params.idCardSet;
-  let cardSet = store.data.find((x) => x.id === id);
+  let cardSet = store.card.data.find((x) => x.id === id);
   let index = props.route.params.index;
   let cards = cardSet.cards;
   return {

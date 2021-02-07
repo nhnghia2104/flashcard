@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 const selectFromStore = (store, props) => {
   let id = props.route.params.idCardSet;
   return {
-    cardSet: store.data.find((x) => x.id === id), // finding card set in list card set by id
+    cardSet: store.card.data.find((x) => x.id === id), // finding card set in list card set by id
   };
 };
 

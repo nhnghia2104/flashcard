@@ -1,890 +1,148 @@
 [
   {
-    "id": "1611681227829",
-    "name": "TOEIC",
+    "id": "1",
+    "name": "TOEIC 01",
     "isStarred": false,
     "lastAccess": 1611681227829,
     "dateCreated": 1611681227829,
     "lastIndex" : 0,
     "cards": [
       {
-        "id": "1611681227829",
+        "id": "C1",
         "point": 0,
         "data": {
           "front": {
-            "text": "Khóc",
+            "text": "Contracts",
             "imageURL": ""
           },
           "back": {
-            "text": "huhu",
+            "text": "Hợp đồng, giao kèo, khế ước, giấy ký kết",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C2",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Marketing",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Thị trường, nơi tiêu thụ; khách hàng",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C3",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Warranties",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Bảo hành, sự bảo đảm",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C4",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Business planning",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Tổ chức kế hoạch công sở",
+            "imageURL": ""
+          }
+        }
+      },
+   {
+        "id": "C5",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "Conferences ",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "Hội nghị, cuộc gặp mặt",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C6",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Computers",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Máy tính",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C7",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Office Technology",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Vấn đề kĩ thuật trong công ty",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C8",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Job Advertising and Recruiting",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Quảng cáo công việc, tuyển dụng",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C9",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Applying and Interviewing",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
+            "text": "Nộp đơn xin việc, phỏng vấn",
             "imageURL": ""
           }
         }
       },
       {
-        "id": "1611681227829",
+        "id": "C10",
         "point": 0,
         "data": {
           "front": {
-            "text": "Cười",
+            "text": "Salaries and benefits",
             "imageURL": ""
           },
           "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "1611681227829",
-        "point": 0,
-        "data": {
-          "front": {
-            "text": "Cười",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "hihi",
+            "text": "Lương bổng và lợi ích",
             "imageURL": ""
           }
         }
@@ -892,36 +150,153 @@
     ]
   },
   {
-    "id": "1611681227828",
-    "name": "IELTS",
+    "id": "2",
+    "name": "IELTS 01",
     "isStarred": false,
     "lastAccess": 1611681227829,
     "dateCreated": 1611681227829,
     "lastIndex" : 0,
     "cards": [
       {
-        "id": "1611681227829",
+        "id": "C1",
         "point": 0,
         "data": {
           "front": {
-            "text": "Test",
+            "text": "abandon",
             "imageURL": ""
           },
           "back": {
-            "text": "test back",
+            "text": "bỏ, từ bỏ",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C2",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "abandoned",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "bị bỏ rơi, bị ruồng bỏ",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C3",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "able",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "có năng lực, có tài",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C4",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "absence",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "sự vắng mặt",
+            "imageURL": ""
+          }
+        }
+      },
+   {
+        "id": "C5",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "academic",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "thuộc học viện, ĐH, viện hàn lâm",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C6",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "accidental",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "tình cờ, bất ngờ",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C7",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "accuse",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "tố cáo, buộc tội, kết tội",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C8",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "achieve",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "đạt được, dành được",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C9",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "advertising",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "sự quảng cáo, nghề quảng cáo",
+            "imageURL": ""
+          }
+        }
+      },
+      {
+        "id": "C10",
+        "point": 0,
+        "data": {
+          "front": {
+            "text": "alarming",
+            "imageURL": ""
+          },
+          "back": {
+            "text": "làm lo sợ, làm hốt hoảng, làm sợ hãi",
             "imageURL": ""
           }
         }
       }
     ]
-  },
-  {
-    "id": "1611681227827",
-    "name": "TOEFL",
-    "isStarred": false,
-    "lastAccess": 1611681227829,
-    "dateCreated": 1611681227829,
-    "lastIndex" : 0,
-    "cards": []
   }
 ]
