@@ -27,6 +27,16 @@ export function addNewCardSet(name: string) {
   };
 }
 
+export function updateCardSetName(idCardSet, name) {
+  return (dispatch: any) => {
+    service.updateCardSetName(idCardSet, name);
+    dispatch({
+      type: "CARDSET_UPDATE_NAME",
+    });
+    dispatch(getAllCardSet());
+  };
+}
+
 export function deleteCardSet(idCardSet: string) {
   return (dispatch: any) => {
     service.deleteCardSet(idCardSet);

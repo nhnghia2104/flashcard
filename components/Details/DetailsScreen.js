@@ -12,12 +12,13 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import { Header, Button } from "react-native-elements";
+import { Header, Button, registerCustomIconType } from "react-native-elements";
 import { connect } from "react-redux";
 import {
   updateCardSetLastAccess,
   updateCardSetLastIndex,
   removeCardInCardSet,
+  updateCardSetName,
 } from "../../actions/CardSet";
 import { IconButton } from "react-native-paper";
 import type { CardSet } from "../../model/CardSet";
@@ -26,6 +27,7 @@ import ProgressBar from "react-native-progress/Bar";
 import * as Animatable from "react-native-animatable";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { call } from "react-native-reanimated";
+import EditNameArea from "./EditNameArea";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -34,17 +36,18 @@ type Props = {
 };
 
 const DetailsScreen = (props) => {
-  var lastIndex = 0;
   const [loaded, setLoaded] = useState(false);
   const [firstChange, setFirstChange] = useState(true);
+
+  const [nameCard, setNameCard] = useState("");
   const _flatListFlipCard = React.createRef();
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const slideDown = React.useRef(new Animated.Value(0)).current;
   useEffect(() => {
     if (props.cardSet) {
       props.dispatch(updateCardSetLastAccess(props.cardSet.id));
+      setNameCard(props.cardSet.name);
     }
-    // console.log(props.cardSet.lastIndex);
     setTimeout(() => setLoaded(true), 0);
     return () => {};
   }, []);
@@ -106,6 +109,10 @@ const DetailsScreen = (props) => {
   });
   const handleZoom = (index) => {
     props.navigation.push("ZoomScreen", { idCardSet: props.cardSet.id });
+  };
+  const changeName = (name) => {
+    console.log(name);
+    props.dispatch(updateCardSetName(props.cardSet.id, name));
   };
 
   return (
@@ -205,7 +212,10 @@ const DetailsScreen = (props) => {
                 </Animated.View>
               )}
               <Animated.View style={{ translateY: translateYFlipCard }}>
-                <Text style={[styles.setCardName]}>{props.cardSet.name}</Text>
+                <EditNameArea
+                  name={nameCard}
+                  changeName={(name) => changeName(name)}
+                />
                 <View style={[styles.actionGroup]}>
                   <TouchableOpacity
                     style={[styles.buttonContainer]}
@@ -397,13 +407,6 @@ const styles = StyleSheet.create({
     minHeight: height * 0.35,
     width: width,
   },
-  setCardName: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginHorizontal: 20,
-    marginVertical: 10,
-    color: "#333333",
-  },
   textNumberCard: {
     fontSize: 16,
     fontWeight: "600",
@@ -474,9 +477,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
   },
   textTerm: {
-    color: "#333333",
+    color: "#4F4F4F",
     fontSize: 15,
-    // fontWeight: "700",
+    fontWeight: "bold",
     marginBottom: 8,
   },
   textDefinition: {

@@ -15,4 +15,5 @@ export type Action =
   | { type: "CARDSET_UPDATE_CARDS" }
   | { type: "CARD_PUSH" }
   | { type: "CARD_UPDATE_IN_CARDSET" }
-  | { type: "CARD_REMOVE_FROM_CARDSET" };
+  | { type: "CARD_REMOVE_FROM_CARDSET" }
+  | { type: "CARDSET_UPDATE_NAME" };

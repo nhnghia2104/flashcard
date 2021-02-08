@@ -113,6 +113,23 @@ class CardSetService {
     }
   }
 
+  updateCardSetName(idCardSet, name) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      console.log(idCardSet);
+      if (setCards.length == 0) {
+        return;
+      }
+
+      context.write(() => {
+        setCards[0].name = name;
+      });
+    } finally {
+      context.close();
+    }
+  }
+
   updateCardSetLastAccess(idCardSet: string) {
     let context = realm.current();
     try {
