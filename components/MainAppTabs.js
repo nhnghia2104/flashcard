@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DetailScreen from "./Details/DetailsScreen";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
 import HomeStackScreen from "./Home/HomeStackScreen";
-import ZoomScreen from "./Details/ZoomScreen";
+import LearnCard from "./Learn/LearnCard";
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -29,7 +29,7 @@ function MainAppTabs() {
         component={HomeStackScreen}
         removeClippedSubviews={true}
         options={{
-          tabBarColor: "#02c39a",
+          tabBarColor: "#7098da",
           tabBarIcon: ({ color }) => (
             <Image
               source={require("../assets/icon/home/home.png")}
@@ -68,10 +68,10 @@ function MainAppTabs() {
       />
       <Tab.Screen
         name="Huhu"
-        component={ZoomScreen}
+        component={LearnCard}
         options={{
           tabBarLabel: "",
-          tabBarColor: "#219653",
+          tabBarColor: "#6EB6FF",
           tabBarIcon: ({ color }) => (
             <Image
               source={require("../assets/icon/search/search.png")}
@@ -83,12 +83,6 @@ function MainAppTabs() {
             />
           ),
         }}
-        listeners={({ navigation }) => ({
-          tabPress: (event) => {
-            event.preventDefault();
-            navigation.navigate("ZoomScreen");
-          },
-        })}
       />
     </Tab.Navigator>
   );

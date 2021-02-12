@@ -17,10 +17,11 @@ import {
   addNewCardSet,
   deleteCardSet,
 } from "../../actions/CardSet";
+import { getLearningTest } from "../../actions/Game";
 import { connect } from "react-redux";
 import realm from "../../realm";
 import type { CardSet } from "../../model/CardSet";
-import LinearGradient from "react-native-linear-gradient";
+// import LinearGradient from "react-native-linear-gradient";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -39,6 +40,7 @@ class HomeScreen extends Component {
   componentDidMount() {
     // this.props.dispatch(clearAllCardSet());
     this.props.dispatch(getAllCardSet());
+    this.props.dispatch(getLearningTest());
   }
   componentDidUpdate() {}
   renderItem = ({ item }) => {
@@ -73,13 +75,13 @@ class HomeScreen extends Component {
         <Header
           // ViewComponent={LinearGradient}
           // linearGradientProps={{
-          //   colors: ["#02c39a", "#f0f3bd"],
-          //   start: { x: 0, y: 0.6 },
+          //   colors: ["#7098da", "#6EB6FF"],
+          //   start: { x: 0, y: 0.3 },
           //   end: { x: 0, y: 1 },
           // }}
-          backgroundColor="#02c39a"
+          backgroundColor="#7098da"
           containerStyle={{
-            borderBottomColor: "#368cfc",
+            borderBottomColor: "#7098da",
             borderBottomWidth: 0,
             zIndex: 1000,
           }}
@@ -147,10 +149,20 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     minHeight: 100,
-    backgroundColor: "rgba(240, 243, 189, 0.4)",
-    // backgroundColor: "#f0f3bd",
+    // backgroundColor: "rgba(110, 182, 255, 0.3)",
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 3,
+    // shadow
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   cardTitle: {
     fontWeight: "700",

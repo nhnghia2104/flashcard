@@ -26,6 +26,7 @@ import FlipCard from "react-native-flip-card";
 import ProgressBar from "react-native-progress/Bar";
 import * as Animatable from "react-native-animatable";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import LinearGradient from "react-native-linear-gradient";
 import { call } from "react-native-reanimated";
 import EditNameArea from "./EditNameArea";
 type Props = {
@@ -90,7 +91,7 @@ const DetailsScreen = (props) => {
   const scrollToIndex = () => {
     _flatListFlipCard.current.scrollToIndex({
       animated: true,
-      index: 1,
+      index: 8,
       viewPosition: 0.5,
     });
   };
@@ -119,9 +120,15 @@ const DetailsScreen = (props) => {
     <View style={styles.container}>
       <Header
         barStyle="light-content"
-        backgroundColor="#02c39a"
+        // ViewComponent={LinearGradient}
+        // linearGradientProps={{
+        //   colors: ["#7098da", "#6EB6FF"],
+        //   start: { x: 0, y: 0.3 },
+        //   end: { x: 0, y: 1 },
+        // }}
+        backgroundColor="#7098da"
         containerStyle={{
-          borderBottomColor: "#02c39a",
+          borderBottomColor: "#7098da",
           borderBottomWidth: 0,
           zIndex: 1000,
         }}
@@ -157,7 +164,7 @@ const DetailsScreen = (props) => {
       />
       {!loaded && (
         <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#02c39a" />
+          <ActivityIndicator size="large" color="#7098da" />
         </View>
       )}
       {loaded && props.cardSet && (
@@ -174,7 +181,11 @@ const DetailsScreen = (props) => {
                   ]}
                 >
                   {props.cardSet.cards.length != 0 && (
-                    <View style={styles.backGroundView}></View>
+                    <LinearGradient
+                      colors={["#7098da", "#6EB6FF"]}
+                      style={styles.backGroundView}
+                    ></LinearGradient>
+                    // <View style={styles.backGroundView}></View>
                   )}
                   <Animated.FlatList
                     ref={_flatListFlipCard}
@@ -343,7 +354,7 @@ const FlipCardItem = ({ item, index, scrollX, callback }) => {
           <Text style={styles.textBlack}>{item.data.front.text}</Text>
           <IconButton
             onPress={callback}
-            color="#02c39a"
+            color="#7098da"
             style={styles.buttonZoom}
             icon={require("../../assets/icon/zoom/zoom.png")}
           />
@@ -353,7 +364,7 @@ const FlipCardItem = ({ item, index, scrollX, callback }) => {
           <Text style={styles.textBlack}>{item.data.back.text}</Text>
           <IconButton
             onPress={() => console.log("back")}
-            color="#02c39a"
+            color="#7098da"
             style={styles.buttonZoom}
             icon={require("../../assets/icon/zoom/zoom.png")}
           />
@@ -390,7 +401,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backGroundView: {
-    backgroundColor: "#02c39a",
+    backgroundColor: "#7098da",
     width: width,
     height: (height * 0.35) / 2,
     position: "absolute",
@@ -449,7 +460,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginHorizontal: "auto",
     borderBottomWidth: 5,
-    borderColor: "#F0F3BD",
+    borderColor: "#6EB6FF",
     width: "47%",
     // flex: 1,
   },
@@ -477,13 +488,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
   },
   textTerm: {
-    color: "#4F4F4F",
+    color: "#333333",
     fontSize: 15,
     fontWeight: "bold",
     marginBottom: 8,
   },
   textDefinition: {
-    color: "#4F4F4F",
+    color: "#333333",
     fontSize: 15,
   },
   tickerContainer: {
@@ -504,7 +515,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     textAlignVertical: "center",
-    color: "#02c39a",
+    color: "#7098da",
   },
   buttonZoom: {
     position: "absolute",
@@ -529,7 +540,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   deleteBox: {
-    backgroundColor: "#e01e37",
+    backgroundColor: "#DA7070",
     width: 80,
     justifyContent: "center",
     alignItems: "center",
@@ -538,7 +549,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 40,
     height: 40,
-    tintColor: "#02C39A",
+    tintColor: "#7098da",
     marginBottom: 5,
   },
 });

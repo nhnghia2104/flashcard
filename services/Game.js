@@ -1,51 +1,27 @@
 "use strict";
+import { ReloadInstructions } from "react-native/Libraries/NewAppScreen";
 import realm from "../realm";
 
 class GameService {
-  getAllCardSet() {
+  generateUniqueNumberArray(aQuantity, aFrom, aTo) {
+    var arr = [];
+    while (arr.length < aQuantity) {
+      var r = Math.floor(Math.random() * aTo) + aFrom;
+      if (arr.indexOf(r) === -1) arr.push(r);
+    }
+    return arr;
+  }
+  generateLearningTest(idCardSet) {
     let context = realm.current();
-    var data = [];
+    var game = [];
     try {
-      let setCards = context.objects("CardSet");
-      console.log(setCards.length);
-      for (var i = 0; i < setCards.length; i++) {
-        var setCard = setCards[i];
-        var item = {
-          id: setCard.id,
-          name: setCard.name,
-          isStarred: setCard.isStarred,
-          lastAccess: setCard.lastAccess,
-          dateCreated: setCard.dateCreated,
-          lastIndex: setCard.lastIndex,
-        };
-        if (setCard.cards) {
-          var cards = [];
-          for (var j = 0; j < setCard.cards.length; j++) {
-            var card = setCard.cards[j];
-            var itemCard = {
-              id: card.id,
-              point: card.point,
-              data: {
-                front: {
-                  text: card.data.front.text,
-                  imageURL: card.data.front.imageURL,
-                },
-                back: {
-                  text: card.data.back.text,
-                  imageURL: card.data.back.imageURL,
-                },
-              },
-            };
-            cards.push(itemCard);
-          }
-          item.cards = cards;
-        }
-        data.push(item);
-      }
+      var setCards = context.object("CardSet").filtered(`id = "${idCardSet}"`);
+      if (!setCards.length) return;
+      var targetSetCard = setCards[0];
     } finally {
       context.close();
     }
-    return data;
+    return game;
   }
 }
 

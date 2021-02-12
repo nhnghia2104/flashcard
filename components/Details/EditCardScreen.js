@@ -44,14 +44,14 @@ function EditCardScreen(props) {
     console.log(card);
   };
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       {card != null && (
         <View style={styles.container}>
           <Header
             barStyle="light-content"
-            backgroundColor="#02c39a"
+            backgroundColor="#7098da"
             containerStyle={{
-              borderBottomColor: "#02c39a",
+              borderBottomColor: "#7098da",
               borderBottomWidth: 0,
               zIndex: 1000,
             }}
@@ -133,9 +133,7 @@ const styles = StyleSheet.create({
     // overflow: "visible",
   },
   viewInput: {
-    marginBottom: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    margin: 20,
     backgroundColor: "#fff",
     borderRadius: 8,
     padding: 20,
@@ -151,7 +149,7 @@ const styles = StyleSheet.create({
   labelForInput: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#4F4F4F",
+    color: "#828282",
     textTransform: "capitalize",
   },
   textInputStyle: {

@@ -77,7 +77,7 @@ function ZoomScreen(props) {
       />
       {!loaded && (
         <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#02c39a" />
+          <ActivityIndicator size="large" color="#7098da" />
         </View>
       )}
       {loaded && props.cardSet && (
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     // backgroundColor: "#000",
     padding: 20,
+    paddingTop: 5,
     borderRadius: 3,
     flex: 1,
   },
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   },
   textBlack: {
     color: "#333333",
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: "600",
   },
   tickerContainer: {

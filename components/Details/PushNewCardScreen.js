@@ -74,7 +74,7 @@ class PushNewCardScreen extends React.Component {
           <View style={styles.container}>
             <Header
               barStyle="light-content"
-              backgroundColor="#02c39a"
+              backgroundColor="#7098da"
               containerStyle={{
                 borderBottomColor: "#fff",
                 borderBottomWidth: 0,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   labelForInput: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#4F4F4F",
+    color: "#828282",
     textTransform: "capitalize",
   },
 

@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Dimensions,
-  TouchableOpacity,
-  ScrollView,
-  Animated,
-  Image,
-  TextInput,
-} from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
+import { Input } from "react-native-elements";
 const EditNameArea = ({ name, changeName }) => {
   const [editName, setEditName] = useState(false);
   const [textEdit, setTextEdit] = useState("");
   useEffect(() => {
     setTextEdit(name);
-
     return () => {};
   }, []);
   const endEditName = () => {
     changeName(textEdit);
-    // console.log(textEdit);
     setEditName(false);
   };
   if (!editName) {
@@ -30,25 +18,31 @@ const EditNameArea = ({ name, changeName }) => {
         style={[styles.editNameGroup]}
         onPress={() => setEditName(true)}
       >
-        <Text numberOfLines={1} style={[styles.setCardName]}>
-          {textEdit}
-        </Text>
         <Image
           style={styles.editNameIcon}
           source={require("../../assets/icon/edit/edit.png")}
         />
+        <Text numberOfLines={1} style={[styles.setCardName]}>
+          {textEdit}
+        </Text>
       </TouchableOpacity>
     );
   } else {
     return (
       <View style={[styles.editNameGroup]}>
-        <TextInput
+        <Input
           style={styles.textInputStyle}
           onEndEditing={endEditName}
           onChangeText={(text) => setTextEdit(text)}
           placeholder={"term, question,..."}
           autoFocus
           defaultValue={textEdit}
+          leftIcon={() => (
+            <Image
+              style={styles.editNameIcon}
+              source={require("../../assets/icon/edit/edit.png")}
+            />
+          )}
         />
       </View>
     );
@@ -69,7 +63,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     tintColor: "#4f4f4f",
-    marginHorizontal: 10,
+    marginRight: 5,
   },
   setCardName: {
     fontSize: 18,
@@ -80,12 +74,8 @@ const styles = StyleSheet.create({
   textInputStyle: {
     height: 40,
     flex: 1,
-    borderBottomColor: "#4F4F4F",
-    borderBottomWidth: 1,
     fontSize: 18,
     fontWeight: "bold",
     color: "#333333",
-    marginBottom: 20,
-    textAlignVertical: "top",
   },
 });
