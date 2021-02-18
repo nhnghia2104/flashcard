@@ -40,6 +40,12 @@ export default function cardReducer(
     case "CARDSET_UPDATE_NAME": {
       return { ...state, data: action.data };
     }
+    case "CARD_UPDATE_POINT": {
+      return { ...state, data: action.data };
+    }
+    case "CARD_GOT": {
+      return { ...state, data: action.data };
+    }
   }
   return state;
 }

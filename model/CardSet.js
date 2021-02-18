@@ -17,6 +17,7 @@ export type DataCard = {
 export type Card = {
   id: String,
   point: Number,
+  got: Boolean,
   data: DataCard,
 };
 

@@ -118,49 +118,10 @@ const DetailsScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <Header
-        barStyle="light-content"
-        // ViewComponent={LinearGradient}
-        // linearGradientProps={{
-        //   colors: ["#7098da", "#6EB6FF"],
-        //   start: { x: 0, y: 0.3 },
-        //   end: { x: 0, y: 1 },
-        // }}
-        backgroundColor="#7098da"
-        containerStyle={{
-          borderBottomColor: "#7098da",
-          borderBottomWidth: 0,
-          zIndex: 1000,
-        }}
-        leftComponent={() => (
-          <IconButton
-            color="#fff"
-            icon={require("../../assets/icon/ios_back/ios_back.png")}
-            onPress={() => props.navigation.pop()}
-          />
-        )}
-        centerComponent={() => (
-          <Text
-            numberOfLines={1}
-            style={{
-              textAlign: "center",
-              color: "#fff",
-              fontSize: 16,
-              height: "100%",
-              textAlignVertical: "center",
-              flex: 1,
-            }}
-          >
-            SET
-          </Text>
-        )}
-        rightComponent={() => (
-          <IconButton
-            color="#fff"
-            icon={require("../../assets/icon/more_hor/more_hor.png")}
-            onPress={scrollToIndex}
-          />
-        )}
+      <MyHeader
+        title="SET"
+        leftPress={() => props.navigation.pop()}
+        rightPress={() => console.log("Press right")}
       />
       {!loaded && (
         <View style={styles.loading}>
@@ -185,7 +146,6 @@ const DetailsScreen = (props) => {
                       colors={["#7098da", "#6EB6FF"]}
                       style={styles.backGroundView}
                     ></LinearGradient>
-                    // <View style={styles.backGroundView}></View>
                   )}
                   <Animated.FlatList
                     ref={_flatListFlipCard}
@@ -200,9 +160,7 @@ const DetailsScreen = (props) => {
                       index,
                     })}
                     initialScrollIndex={props.cardSet.lastIndex}
-                    // initialNumToRender={0}
                     removeClippedSubviews={true}
-                    // disableVirtualization={true}
                     keyExtractor={keyExtractorFlipCardItem}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -245,7 +203,7 @@ const DetailsScreen = (props) => {
                   <TouchableOpacity
                     style={[styles.buttonContainer]}
                     onPress={() =>
-                      props.navigation.push("EditCardSet", {
+                      props.navigation.push("LearnCard", {
                         idCardSet: props.cardSet.id,
                       })
                     }
@@ -266,8 +224,6 @@ const DetailsScreen = (props) => {
           data={props.cardSet.cards}
           renderItem={({ item, index }) => renderListCard({ item, index })}
           keyExtractor={keyExtractorListCardItem}
-          // initialNumToRender={3}
-          // maxToRenderPerBatch={1}
           removeClippedSubviews={true}
           disableVirtualization={true}
         />
@@ -278,7 +234,48 @@ const DetailsScreen = (props) => {
 
 const { width, height } = Dimensions.get("window");
 const TICKER_HEIGHT = 20;
-
+const MyHeader = ({ title, leftPress, rightPress }) => {
+  return (
+    <Header
+      barStyle="light-content"
+      backgroundColor="#7098da"
+      containerStyle={{
+        borderBottomColor: "#7098da",
+        borderBottomWidth: 0,
+        zIndex: 1000,
+      }}
+      leftComponent={() => (
+        <IconButton
+          color="#fff"
+          icon={require("../../assets/icon/ios_back/ios_back.png")}
+          onPress={leftPress}
+        />
+      )}
+      centerComponent={() => (
+        <Text
+          numberOfLines={1}
+          style={{
+            textAlign: "center",
+            color: "#fff",
+            fontSize: 16,
+            height: "100%",
+            textAlignVertical: "center",
+            flex: 1,
+          }}
+        >
+          {title}
+        </Text>
+      )}
+      rightComponent={() => (
+        <IconButton
+          color="#fff"
+          icon={require("../../assets/icon/more_hor/more_hor.png")}
+          onPress={rightPress}
+        />
+      )}
+    />
+  );
+};
 const CardItem = ({ item, index, props }) => {
   const _swipe = useRef(null);
 

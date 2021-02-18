@@ -10,7 +10,7 @@ class CardSetService {
         return;
       }
       // var defaultTestData = require("../testData.json");
-      fetch("http://www.json-generator.com/api/json/get/ceUpnFDHOq?indent=2", {
+      fetch("http://www.json-generator.com/api/json/get/bPdmJeqztu?indent=2", {
         method: "GET",
       })
         .then((response) => response.json())
@@ -66,6 +66,7 @@ class CardSetService {
             var itemCard = {
               id: card.id,
               point: card.point,
+              got: card.got,
               data: {
                 front: {
                   text: card.data.front.text,
@@ -233,6 +234,34 @@ class CardSetService {
         if (setCards[0].cards[index]) {
           setCards[0].cards[index] = card;
         }
+      });
+    } finally {
+      context.close();
+    }
+  }
+
+  increaseCardPointInCardSet(idCardSet, idCard) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      if (!setCards.length) return;
+      context.write(() => {
+        var indexCard = setCards[0].cards.findIndex((x) => x.id == idCard);
+        setCards[0].cards[indexCard].point += 1;
+      });
+    } finally {
+      context.close();
+    }
+  }
+
+  gotCard(idCardSet, idCard) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      if (!setCards.length) return;
+      context.write(() => {
+        var indexCard = setCards[0].cards.findIndex((x) => x.id == idCard);
+        setCards[0].cards[indexCard].got = true;
       });
     } finally {
       context.close();

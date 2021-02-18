@@ -1,10 +1,30 @@
-import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text, Image, ActivityIndicator } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
+import { increaseCardPointInCardSet } from "../../actions/CardSet";
+
+import GetCard from "./GetCard";
+import Test from "./Test";
 function LearnCard(props) {
+  const [index, setIndex] = useState(0);
+  const [cardList, setCardList] = useState([]);
+  const [status, setStatus] = useState("loading");
+  function checkPoint(card) {
+    return card.point < 2;
+  }
+  useEffect(() => {
+    if (props.cardSet) {
+      var card = props.cardSet.cards.filter(checkPoint).slice(0, 5);
+      setCardList(card);
+      if (card[index].got == false) {
+        setStatus("learn");
+      }
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <MyHeader
@@ -12,27 +32,15 @@ function LearnCard(props) {
         leftPress={() => props.navigation.pop()}
         rightPress={() => console.log("Pressed right")}
       />
-      <View style={styles.learn}>
-        <View style={styles.card}>
-          <View style={styles.cardTop}>
-            <Text style={styles.textQuestion}>
-              Đố anh biết em đang nghĩ gì?
-            </Text>
-          </View>
-          <View style={styles.cardBot}>
-            <Text style={styles.textAnswer}>Đố anh biết em đang nghĩ gì? </Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.action}>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/icon/check_outline/check.png")}
-          />
-        </TouchableOpacity>
-        <Text style={styles.textButton}>Got it!</Text>
-      </View>
+
+      {status == "loading" && <Loading />}
+      {status == "learn" && cardList.length != 0 && (
+        <GetCard
+          data={cardList[index].data}
+          onPressGotIt={() => setStatus("test")}
+        />
+      )}
+      {status == "test" && cardList.length != 0 && <Test />}
     </View>
   );
 }
@@ -41,110 +49,63 @@ const MyHeader = ({ leftPress, rightPress, title }) => {
     <Header
       barStyle="light-content"
       backgroundColor="#7098da"
-      containerStyle={{
-        borderBottomColor: "#7098da",
-        borderBottomWidth: 0,
-        zIndex: 1000,
-      }}
+      containerStyle={styles.headerContainer}
       leftComponent={() => (
         <IconButton
           color="#fff"
-          icon={require("../../assets/icon/ios_back/ios_back.png")}
+          icon={require("../../assets/icon/close/close.png")}
           onPress={leftPress}
         />
       )}
       centerComponent={() => (
-        <Text
-          numberOfLines={1}
-          style={{
-            textAlign: "center",
-            color: "#fff",
-            fontSize: 16,
-            height: "100%",
-            textAlignVertical: "center",
-            flex: 1,
-          }}
-        >
+        <Text numberOfLines={1} style={styles.headerText}>
           {title}
         </Text>
       )}
+      rightComponent={() => <View></View>}
     />
   );
 };
-
+const Loading = () => {
+  return (
+    <View style={styles.loading}>
+      <ActivityIndicator size="large" color="#7098da" />
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
-  learn: {
-    flex: 3,
-    justifyContent: "center",
-    alignContent: "center",
+  headerContainer: {
+    borderBottomColor: "#7098da",
+    borderBottomWidth: 0,
+    zIndex: 1000,
   },
-  card: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 20,
-    margin: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-  },
-
-  cardTop: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderColor: "#4f4f4f",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  cardBot: {
-    flex: 1,
-    justifyContent: "center",
+  loading: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     alignItems: "center",
+    justifyContent: "center",
   },
-  textQuestion: {
+  headerText: {
     textAlign: "center",
-    color: "#4f4f4f",
+    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
-  },
-  textAnswer: {
-    textAlign: "center",
-    color: "#4f4f4f",
-    fontSize: 16,
-  },
-  buttonContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#70DA7B",
-  },
-  textButton: {
-    color: "#70DA7B",
-    marginTop: 8,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  action: {
+    height: "100%",
+    textAlignVertical: "center",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon: {
-    tintColor: "#fff",
-    width: 24,
-    height: 24,
   },
 });
 
-export default LearnCard;
+const selector = (store, props) => {
+  let id = props.route.params.idCardSet;
+  return {
+    cardSet: store.card.data.find((x) => x.id == id),
+  };
+};
+export default connect(selector)(LearnCard);

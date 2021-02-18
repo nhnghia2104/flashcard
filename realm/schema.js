@@ -23,6 +23,7 @@ const Card = {
   properties: {
     id: "string",
     point: { type: "int", default: 0 },
+    got: { type: "bool", default: false },
     data: "DataCard",
   },
 };

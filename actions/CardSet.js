@@ -106,6 +106,26 @@ export function updateCardInCardSet(idCardSet, card, index) {
   };
 }
 
+export function increaseCardPointInCardSet(idCardSet, idCard) {
+  return (dispatch: any) => {
+    service.increaseCardPointInCardSet(idCardSet, idCard);
+    dispatch({
+      type: "CARD_UPDATE_POINT",
+    });
+    dispatch(getAllCardSet());
+  };
+}
+
+export function gotCard(idCardSet, idCard) {
+  return (dispatch: any) => {
+    service.gotCard(idCardSet, idCard);
+    dispatch({
+      type: "CARD_GOT",
+    });
+    dispatch(getAllCardSet());
+  };
+}
+
 export function removeCardInCardSet(idCardSet, index) {
   return (dispatch: any) => {
     service.removeCardInCardSet(idCardSet, index);

@@ -10,6 +10,7 @@
       {
         "id": "C1",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Contracts",
@@ -24,6 +25,7 @@
       {
         "id": "C2",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Marketing",
@@ -38,6 +40,7 @@
       {
         "id": "C3",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Warranties",
@@ -52,6 +55,7 @@
       {
         "id": "C4",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Business planning",
@@ -66,6 +70,7 @@
    {
         "id": "C5",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Conferences ",
@@ -80,6 +85,7 @@
       {
         "id": "C6",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Computers",
@@ -94,6 +100,7 @@
       {
         "id": "C7",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Office Technology",
@@ -108,6 +115,7 @@
       {
         "id": "C8",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Job Advertising and Recruiting",
@@ -122,6 +130,7 @@
       {
         "id": "C9",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Applying and Interviewing",
@@ -136,6 +145,7 @@
       {
         "id": "C10",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "Salaries and benefits",
@@ -160,6 +170,7 @@
       {
         "id": "C1",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "abandon",
@@ -174,6 +185,7 @@
       {
         "id": "C2",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "abandoned",
@@ -188,6 +200,7 @@
       {
         "id": "C3",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "able",
@@ -202,6 +215,7 @@
       {
         "id": "C4",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "absence",
@@ -216,6 +230,7 @@
    {
         "id": "C5",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "academic",
@@ -230,6 +245,7 @@
       {
         "id": "C6",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "accidental",
@@ -244,6 +260,7 @@
       {
         "id": "C7",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "accuse",
@@ -258,6 +275,7 @@
       {
         "id": "C8",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "achieve",
@@ -272,6 +290,7 @@
       {
         "id": "C9",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "advertising",
@@ -286,6 +305,7 @@
       {
         "id": "C10",
         "point": 0,
+        "got":false,
         "data": {
           "front": {
             "text": "alarming",

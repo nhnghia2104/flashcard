@@ -11,18 +11,6 @@ class GameService {
     }
     return arr;
   }
-  generateLearningTest(idCardSet) {
-    let context = realm.current();
-    var game = [];
-    try {
-      var setCards = context.object("CardSet").filtered(`id = "${idCardSet}"`);
-      if (!setCards.length) return;
-      var targetSetCard = setCards[0];
-    } finally {
-      context.close();
-    }
-    return game;
-  }
 }
 
 module.exports = GameService;
