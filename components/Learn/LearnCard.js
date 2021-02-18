@@ -8,6 +8,7 @@ import { increaseCardPointInCardSet } from "../../actions/CardSet";
 
 import GetCard from "./GetCard";
 import Test from "./Test";
+import Remind from "./Remind";
 function LearnCard(props) {
   const [index, setIndex] = useState(0);
   const [cardList, setCardList] = useState([]);
@@ -24,7 +25,19 @@ function LearnCard(props) {
       }
     }
   }, []);
-
+  const handleAnswer = (isAnswer) => {
+    console.log(isAnswer);
+    if (isAnswer) {
+      setIndex(index + 1);
+      if (card[index].got == false) {
+        setStatus("learn");
+      } else {
+        setStatus("test");
+      }
+    } else {
+      setStatus("remind");
+    }
+  };
   return (
     <View style={styles.container}>
       <MyHeader
@@ -40,7 +53,16 @@ function LearnCard(props) {
           onPressGotIt={() => setStatus("test")}
         />
       )}
-      {status == "test" && cardList.length != 0 && <Test />}
+      {status == "test" && cardList.length != 0 && (
+        <Test
+          cardSet={props.cardSet}
+          handleAnswer={(isAnswer) => handleAnswer(isAnswer)}
+          currentCardIndex={index}
+        />
+      )}
+      {status == "remind" && cardList.length != 0 && (
+        <Remind data={cardList[index].data} />
+      )}
     </View>
   );
 }

@@ -50,6 +50,7 @@ class PushNewCardScreen extends React.Component {
       var card = {
         id: Date.now().toString(),
         point: 0,
+        got: false,
         data: {
           front: {
             text: this.state.frontText,

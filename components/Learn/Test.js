@@ -1,38 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { Header } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { set } from "react-native-reanimated";
 import { connect } from "react-redux";
-function Test({ data, onPressGotIt }) {
+import MultiChoiceScreen from "./MultiChoiceScreen";
+function Test({ cardSet, handleAnswer, currentCardIndex }) {
   return (
-    <>
-      <View style={styles.learn}>
-        <View style={styles.card}>
-          <View style={styles.cardTop}>
-            <Text style={styles.textQuestion}>
-              {data ? data.front.text : "term"}
-            </Text>
-          </View>
-          <View style={styles.cardBot}>
-            <Text style={styles.textAnswer}>
-              {data ? data.back.text : "definition"}
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.action}>
-        <TouchableOpacity style={styles.buttonContainer} onPress={onPressGotIt}>
-          <Image
-            style={styles.icon}
-            source={require("../../assets/icon/check_outline/check.png")}
-          />
-        </TouchableOpacity>
-        <Text style={styles.textButton}>Got it!</Text>
-      </View>
-    </>
+    <MultiChoiceScreen
+      cardSet={cardSet}
+      currentCardIndex={currentCardIndex}
+      handleAnswer={(isAnswer) => handleAnswer(isAnswer)}
+    />
   );
 }
-
 const styles = StyleSheet.create({
   learn: {
     flex: 7,
@@ -103,5 +84,4 @@ const styles = StyleSheet.create({
     height: 30,
   },
 });
-
 export default Test;

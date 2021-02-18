@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
@@ -10,39 +10,84 @@ const data = [
   "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
   "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
 ];
-function MultiChoiceScreen(props) {
-  const handleAnswer = (index) => {
-    console.log(props.data);
-    console.log(index);
-  };
+function MultiChoiceScreen({ cardSet, handleAnswer, currentCardIndex }) {
+  const [question, setQuestion] = useState("");
+  const [arrayIndex, setArrayIndex] = useState([]);
+  useEffect(() => {
+    if (cardSet) {
+      setQuestion(cardSet.cards[currentCardIndex].data.front.text);
+      var tmpArrIndex = generateUniqueNumberArray(
+        currentCardIndex,
+        cardSet.cards.length
+      );
+      tmpArrIndex.push(currentCardIndex);
+      console.log(tmpArrIndex);
+      tmpArrIndex = shuffle(tmpArrIndex);
+      console.log(tmpArrIndex);
+      setArrayIndex(tmpArrIndex);
+    }
+  }, []);
   return (
-    <View style={styles.container}>
-      <MyHeader
-        title="LEARN"
-        leftPress={() => props.navigation.pop()}
-        rightPress={() => console.log("Pressed right")}
-      />
-      <View style={styles.question}>
-        <View style={styles.card}>
-          <Text style={styles.textQuestion}>Đố anh biết em đang nghĩ gì? </Text>
-        </View>
-      </View>
-      <View style={styles.answer}>
-        <Text style={styles.answerHeader}>Choose the best answer</Text>
-        <ScrollView>
-          {data.map((item, index) => (
-            <AnswerOption
-              key={index}
-              index={index}
-              text={item}
-              onPress={() => handleAnswer(index)}
-            />
-          ))}
-        </ScrollView>
-      </View>
-    </View>
+    <>
+      {cardSet && (
+        <>
+          <View style={styles.question}>
+            <View style={styles.card}>
+              <Text style={styles.textQuestion}>
+                {cardSet.cards[currentCardIndex].data.front.text}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.answer}>
+            <Text style={styles.answerHeader}>Choose the best answer</Text>
+            <ScrollView>
+              {arrayIndex.map((item, index) => (
+                <AnswerOption
+                  key={index}
+                  index={index}
+                  text={cardSet.cards[item].data.back.text}
+                  isAnswer={item == currentCardIndex}
+                  onPress={(isAnswer) => handleAnswer(isAnswer)}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        </>
+      )}
+    </>
   );
 }
+
+function generateUniqueNumberArray(except, max) {
+  var arr = [];
+  var target = max < 3 ? max - 1 : 3;
+  while (arr.length < target) {
+    var r = Math.floor(Math.random() * max);
+    if (arr.indexOf(r) === -1 && r != except) arr.push(r);
+  }
+  return arr;
+}
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex !== 0) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 const MyHeader = ({ leftPress, rightPress, title }) => {
   return (
     <Header
@@ -78,11 +123,31 @@ const MyHeader = ({ leftPress, rightPress, title }) => {
     />
   );
 };
-const AnswerOption = ({ index, text, onPress }) => {
+const AnswerOption = ({ index, text, onPress, isAnswer }) => {
+  const [backgroundColor, setBackgroundColor] = useState("#fff");
+  const [textColor, setTextColor] = useState("#333333");
+  const [fontWeight, setFontWeight] = useState("600");
+  const handleAnswer = () => {
+    if (isAnswer) setBackgroundColor("#70DA7B");
+    else setBackgroundColor("#DA7070");
+    setTextColor("#fff");
+    setFontWeight("bold");
+    setTimeout(function () {
+      onPress(isAnswer);
+    }, 1000);
+  };
+
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.answerOption}>
-        <Text style={styles.textAnswer}>{text}</Text>
+    <TouchableOpacity onPress={handleAnswer}>
+      <View style={[styles.answerOption, { backgroundColor: backgroundColor }]}>
+        <Text
+          style={[
+            styles.textAnswer,
+            { color: textColor, fontWeight: fontWeight },
+          ]}
+        >
+          {text}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -122,7 +187,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   textAnswer: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#333333",
   },
   answerHeader: {
@@ -132,7 +197,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   answerOption: {
-    // flex: 1,
     justifyContent: "center",
     backgroundColor: "#fff",
     padding: 20,
@@ -155,4 +219,4 @@ const selector = (store, props) => {
     data: store.game.data,
   };
 };
-export default connect(selector)(MultiChoiceScreen);
+export default MultiChoiceScreen;

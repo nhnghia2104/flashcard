@@ -519,7 +519,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-
   textHeaderList: {
     fontSize: 16,
     color: "#333333",
