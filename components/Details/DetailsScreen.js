@@ -121,7 +121,7 @@ const DetailsScreen = (props) => {
       <MyHeader
         title="SET"
         leftPress={() => props.navigation.pop()}
-        rightPress={() => console.log("Press right")}
+        rightPress={scrollToIndex}
       />
       {!loaded && (
         <View style={styles.loading}>

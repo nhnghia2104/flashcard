@@ -1,5 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Image, ActivityIndicator } from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ActivityIndicator,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -9,10 +17,12 @@ import { increaseCardPointInCardSet } from "../../actions/CardSet";
 import GetCard from "./GetCard";
 import Test from "./Test";
 import Remind from "./Remind";
+import MultiChoiceScreen from "./MultiChoiceScreen";
 function LearnCard(props) {
   const [index, setIndex] = useState(0);
   const [cardList, setCardList] = useState([]);
   const [status, setStatus] = useState("loading");
+  const _flatListFlipCard = React.createRef();
   function checkPoint(card) {
     return card.point < 2;
   }
@@ -29,15 +39,28 @@ function LearnCard(props) {
     console.log(isAnswer);
     if (isAnswer) {
       setIndex(index + 1);
-      if (card[index].got == false) {
-        setStatus("learn");
-      } else {
-        setStatus("test");
-      }
-    } else {
-      setStatus("remind");
+      console.log(index);
+      _flatListFlipCard.current.scrollToIndex({
+        animated: true,
+        index: index,
+        viewPosition: 0.5,
+      });
     }
   };
+  const renderItem = useCallback(({ index, item }) => (
+    <View style={styles.content}>
+      <MultiChoiceScreen
+        cardSet={props.cardSet}
+        currentCardIndex={index}
+        handleAnswer={(isAnswer) => handleAnswer(isAnswer)}
+      />
+    </View>
+  ));
+  const keyExtractor = useCallback((item, index) => index.toString());
+  const _viewabilityConfig = React.useRef({
+    viewAreaCoveragePercentThreshold: 50,
+    waitForInteraction: true,
+  });
   return (
     <View style={styles.container}>
       <MyHeader
@@ -46,22 +69,22 @@ function LearnCard(props) {
         rightPress={() => console.log("Pressed right")}
       />
 
-      {status == "loading" && <Loading />}
-      {status == "learn" && cardList.length != 0 && (
-        <GetCard
-          data={cardList[index].data}
-          onPressGotIt={() => setStatus("test")}
+      {/* {if (status == "loading") <Loading />} */}
+      {status != "loading" && (
+        <FlatList
+          ref={_flatListFlipCard}
+          data={cardList}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          getItemLayout={(data, index) => ({
+            length: width,
+            offset: width * index,
+            index,
+          })}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          viewabilityConfig={_viewabilityConfig.current}
         />
-      )}
-      {status == "test" && cardList.length != 0 && (
-        <Test
-          cardSet={props.cardSet}
-          handleAnswer={(isAnswer) => handleAnswer(isAnswer)}
-          currentCardIndex={index}
-        />
-      )}
-      {status == "remind" && cardList.length != 0 && (
-        <Remind data={cardList[index].data} />
       )}
     </View>
   );
@@ -95,10 +118,15 @@ const Loading = () => {
     </View>
   );
 };
+const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  content: {
+    width: width,
+    height: height,
   },
   headerContainer: {
     borderBottomColor: "#7098da",

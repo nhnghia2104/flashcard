@@ -128,13 +128,12 @@ const AnswerOption = ({ index, text, onPress, isAnswer }) => {
   const [textColor, setTextColor] = useState("#333333");
   const [fontWeight, setFontWeight] = useState("600");
   const handleAnswer = () => {
-    if (isAnswer) setBackgroundColor("#70DA7B");
-    else setBackgroundColor("#DA7070");
+    onPress(isAnswer);
+    setBackgroundColor(isAnswer ? "#70DA7B" : "#DA7070");
     setTextColor("#fff");
     setFontWeight("bold");
-    setTimeout(function () {
-      onPress(isAnswer);
-    }, 1000);
+    // setTimeout(function () {
+    // }, 1000);
   };
 
   return (

@@ -39,41 +39,11 @@ function ZoomScreen(props) {
   const keyExtractor = useCallback((item, index) => index.toString());
   return (
     <View style={styles.container}>
-      <Header
-        barStyle="dark-content"
-        backgroundColor="#F2F2F2"
-        containerStyle={{
-          borderBottomColor: "#F2F2F2",
-          borderBottomWidth: 0,
-          zIndex: 1000,
-        }}
-        leftComponent={() => (
-          <IconButton
-            color="#4F4F4F"
-            icon={require("../../assets/icon/close/close.png")}
-            onPress={() => props.navigation.pop()}
-          />
-        )}
-        centerComponent={() => (
-          <View
-            style={{
-              justifyContent: "center",
-              alignContent: "center",
-              flex: 1,
-            }}
-          >
-            {loaded && props.cardSet && (
-              <Ticker scrollX={scrollX} data={props.cardSet.cards} />
-            )}
-          </View>
-        )}
-        rightComponent={() => (
-          <IconButton
-            color="#4F4F4F"
-            icon={require("../../assets/icon/more_hor/more_hor.png")}
-            onPress={() => console.log("pressed right")}
-          />
-        )}
+      <MyHeader
+        data={props.cardSet.cards}
+        scrollX={scrollX}
+        leftPress={() => props.navigation.pop()}
+        loaded={loaded}
       />
       {!loaded && (
         <View style={styles.loading}>
@@ -83,7 +53,7 @@ function ZoomScreen(props) {
       {loaded && props.cardSet && (
         <Animated.FlatList
           data={props.cardSet.cards}
-          renderItem={({ item, index }) => renderItem({ item, index })}
+          renderItem={renderItem}
           keyExtractor={keyExtractor}
           getItemLayout={(data, index) => ({
             length: width,
@@ -109,6 +79,44 @@ function ZoomScreen(props) {
 }
 const { width, height } = Dimensions.get("window");
 const TICKER_HEIGHT = 20;
+const MyHeader = ({ data, leftPress, rightPress, scrollX, loaded }) => {
+  return (
+    <Header
+      barStyle="dark-content"
+      backgroundColor="#F2F2F2"
+      containerStyle={{
+        borderBottomColor: "#F2F2F2",
+        borderBottomWidth: 0,
+        zIndex: 1000,
+      }}
+      leftComponent={() => (
+        <IconButton
+          color="#4F4F4F"
+          icon={require("../../assets/icon/close/close.png")}
+          onPress={leftPress}
+        />
+      )}
+      centerComponent={() => (
+        <View
+          style={{
+            justifyContent: "center",
+            alignContent: "center",
+            flex: 1,
+          }}
+        >
+          {loaded && <Ticker scrollX={scrollX} data={data} />}
+        </View>
+      )}
+      rightComponent={() => (
+        <IconButton
+          color="#4F4F4F"
+          icon={require("../../assets/icon/more_hor/more_hor.png")}
+          onPress={() => console.log("pressed right")}
+        />
+      )}
+    />
+  );
+};
 const FlipCardItem = ({ item, index }) => {
   return (
     <View style={[styles.child]}>
