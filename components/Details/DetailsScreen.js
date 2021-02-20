@@ -29,6 +29,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import LinearGradient from "react-native-linear-gradient";
 import { call } from "react-native-reanimated";
 import EditNameArea from "./EditNameArea";
+import Loading from "../Loading";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -123,11 +124,7 @@ const DetailsScreen = (props) => {
         leftPress={() => props.navigation.pop()}
         rightPress={scrollToIndex}
       />
-      {!loaded && (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#7098da" />
-        </View>
-      )}
+      {!loaded && <Loading />}
       {loaded && props.cardSet && (
         <FlatList
           ListHeaderComponent={
@@ -526,17 +523,9 @@ const styles = StyleSheet.create({
     margin: 20,
     marginBottom: 15,
   },
-  loading: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   deleteBox: {
-    backgroundColor: "#DA7070",
+    backgroundColor: "#D75050",
     width: 80,
     justifyContent: "center",
     alignItems: "center",

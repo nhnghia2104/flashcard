@@ -13,6 +13,7 @@ import FlipCard from "react-native-flip-card";
 import { connect } from "react-redux";
 import { IconButton } from "react-native-paper";
 import { updateCardSetLastIndex } from "../../actions/CardSet";
+import Loading from "../Loading";
 function ZoomScreen(props) {
   const [loaded, setLoaded] = useState(false);
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -45,11 +46,7 @@ function ZoomScreen(props) {
         leftPress={() => props.navigation.pop()}
         loaded={loaded}
       />
-      {!loaded && (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" color="#7098da" />
-        </View>
-      )}
+      {!loaded && <Loading />}
       {loaded && props.cardSet && (
         <Animated.FlatList
           data={props.cardSet.cards}

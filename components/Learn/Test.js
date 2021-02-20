@@ -4,10 +4,10 @@ import { Header } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { set } from "react-native-reanimated";
 import { connect } from "react-redux";
-import MultiChoiceScreen from "./MultiChoiceScreen";
+import MultiChoice from "./MultiChoice";
 function Test({ cardSet, handleAnswer, currentCardIndex }) {
   return (
-    <MultiChoiceScreen
+    <MultiChoice
       cardSet={cardSet}
       currentCardIndex={currentCardIndex}
       handleAnswer={(isAnswer) => handleAnswer(isAnswer)}

@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { connect } from "react-redux";
-const data = [
-  "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
-  "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
-  "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
-  "Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết Hợp đồng, giao kèo, khế ước, giấy ký kết",
-];
-function MultiChoiceScreen({ cardSet, handleAnswer, currentCardIndex }) {
-  const [question, setQuestion] = useState("");
+function MultiChoice({ cardSet, handleAnswer, currentCardIndex }) {
   const [arrayIndex, setArrayIndex] = useState([]);
   useEffect(() => {
     if (cardSet) {
-      setQuestion(cardSet.cards[currentCardIndex].data.front.text);
       var tmpArrIndex = generateUniqueNumberArray(
         currentCardIndex,
         cardSet.cards.length
       );
       tmpArrIndex.push(currentCardIndex);
-      console.log(tmpArrIndex);
       tmpArrIndex = shuffle(tmpArrIndex);
-      console.log(tmpArrIndex);
       setArrayIndex(tmpArrIndex);
     }
   }, []);
@@ -47,7 +42,7 @@ function MultiChoiceScreen({ cardSet, handleAnswer, currentCardIndex }) {
                   index={index}
                   text={cardSet.cards[item].data.back.text}
                   isAnswer={item == currentCardIndex}
-                  onPress={(isAnswer) => handleAnswer(isAnswer)}
+                  onPress={(isAnswer) => handleAnswer(isAnswer, item)}
                 />
               ))}
             </ScrollView>
@@ -125,15 +120,11 @@ const MyHeader = ({ leftPress, rightPress, title }) => {
 };
 const AnswerOption = ({ index, text, onPress, isAnswer }) => {
   const [backgroundColor, setBackgroundColor] = useState("#fff");
-  const [textColor, setTextColor] = useState("#333333");
-  const [fontWeight, setFontWeight] = useState("600");
+  const [selected, setSelected] = useState(false);
   const handleAnswer = () => {
+    setBackgroundColor(isAnswer ? "#70DA7B" : "#D75050");
+    setSelected(true);
     onPress(isAnswer);
-    setBackgroundColor(isAnswer ? "#70DA7B" : "#DA7070");
-    setTextColor("#fff");
-    setFontWeight("bold");
-    // setTimeout(function () {
-    // }, 1000);
   };
 
   return (
@@ -142,7 +133,10 @@ const AnswerOption = ({ index, text, onPress, isAnswer }) => {
         <Text
           style={[
             styles.textAnswer,
-            { color: textColor, fontWeight: fontWeight },
+            {
+              color: selected ? "#fff" : "#333333",
+              fontWeight: selected ? "bold" : "600",
+            },
           ]}
         >
           {text}
@@ -202,6 +196,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 10,
+    // borderWidth: 2,
+    // borderColor: "#E0FCFF",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -209,7 +205,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
 });
@@ -218,4 +213,4 @@ const selector = (store, props) => {
     data: store.game.data,
   };
 };
-export default MultiChoiceScreen;
+export default MultiChoice;

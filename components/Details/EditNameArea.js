@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
   editNameIcon: {
     height: 20,
     width: 20,
-    tintColor: "#4f4f4f",
+    tintColor: "#6EB6FF",
     marginRight: 5,
   },
   setCardName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333333",
+    color: "#6EB6FF",
     maxWidth: "90%",
   },
   textInputStyle: {
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333333",
+    color: "#6EB6FF",
   },
 });
