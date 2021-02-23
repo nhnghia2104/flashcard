@@ -24,6 +24,7 @@ import MainAppTabs from "./MainAppTabs";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
 import ZoomScreen from "./Details/ZoomScreen";
 import LearnCard from "./Learn/LearnCard";
+import NotificationScreen from "./NotificationScreen";
 const Drawer = createDrawerNavigator();
 const RootStack = createStackNavigator();
 function RootStackScreen(props) {
@@ -50,6 +51,11 @@ function RootStackScreen(props) {
             <RootStack.Screen
               name="LearnCard"
               component={LearnCard}
+              options={{ animationEnabled: true }}
+            />
+            <RootStack.Screen
+              name="Notification"
+              component={NotificationScreen}
               options={{ animationEnabled: true }}
             />
           </RootStack.Navigator>

@@ -17,23 +17,37 @@ function EndLearn({ total, correct, onPress }) {
         color="#7098DA"
       />
       <Text style={styles.textHeader}>Progress</Text>
+      <Text
+        style={[styles.text, { color: progress > 0.5 ? "#27AE60" : "#FFC30C" }]}
+      >
+        {progress > 0.5 ? "Great!" : "Keep trying!"}
+      </Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    // padding: 20,
+    padding: 20,
     flex: 1,
   },
   textHeader: {
-    fontSize: 16,
+    fontSize: 14,
     letterSpacing: 0.5,
     textAlign: "center",
     fontWeight: "bold",
     color: "#7098DA",
-    marginTop: 8,
+    marginTop: 5,
+    textTransform: "uppercase",
+  },
+  text: {
+    fontSize: 20,
+    letterSpacing: 0.5,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#FFC30C",
+    marginTop: 20,
     textTransform: "uppercase",
   },
   icon: {

@@ -17,7 +17,6 @@ import {
   addNewCardSet,
   deleteCardSet,
 } from "../../actions/CardSet";
-import { getLearningTest } from "../../actions/Game";
 import { connect } from "react-redux";
 import realm from "../../realm";
 import type { CardSet } from "../../model/CardSet";
@@ -40,7 +39,6 @@ class HomeScreen extends Component {
   componentDidMount() {
     // this.props.dispatch(clearAllCardSet());
     this.props.dispatch(getAllCardSet());
-    this.props.dispatch(getLearningTest());
   }
   componentDidUpdate() {}
   renderItem = ({ item }) => {
@@ -57,14 +55,6 @@ class HomeScreen extends Component {
               {item.cards.length} {item.cards.length > 1 ? "cards" : "card"}
             </Text>
           </View>
-          {/* <View style={styles.cardButtonArea}>
-            <IconButton
-              icon={require("../../assets/icon/more_vert/more_vert_black.png")}
-              color={"#4F4F4F"}
-              size={24}
-              onPress={() => this.props.dispatch(deleteCardSet(item.id))}
-            />
-          </View> */}
         </View>
       </TouchableOpacity>
     );
@@ -87,8 +77,9 @@ class HomeScreen extends Component {
           leftComponent={() => (
             <IconButton
               color="#fff"
+              // size={24}
               icon={require("../../assets/icon/bell/bell.png")}
-              onPress={() => console.log("pressed right")}
+              onPress={() => this.props.navigation.navigate("Notification")}
             />
           )}
         />

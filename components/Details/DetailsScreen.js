@@ -20,6 +20,7 @@ import {
   updateCardSetLastIndex,
   removeCardInCardSet,
   updateCardSetName,
+  deleteCardSet,
 } from "../../actions/CardSet";
 import { IconButton } from "react-native-paper";
 import type { CardSet } from "../../model/CardSet";
@@ -107,12 +108,9 @@ const DetailsScreen = (props) => {
     outputRange: [-height * 0.35, 0],
   });
 
-  const scrollToIndex = () => {
-    _flatListFlipCard.current.scrollToIndex({
-      animated: true,
-      index: 8,
-      viewPosition: 0.5,
-    });
+  const deleteCard = (id) => {
+    props.dispatch(deleteCardSet(id));
+    props.navigation.pop();
   };
   const _viewabilityConfig = React.useRef({
     viewAreaCoveragePercentThreshold: 50,
@@ -132,7 +130,7 @@ const DetailsScreen = (props) => {
   };
   const handleLearn = () => {
     if (props.cardSet.cards.filter((x) => x.point < 3).length < 2) {
-      showMessage(null, "You need at least 2 cards for studying");
+      showMessage(null, "You must have at least two cards to begin");
     } else {
       props.navigation.push("LearnCard", {
         idCardSet: props.cardSet.id,
@@ -154,7 +152,7 @@ const DetailsScreen = (props) => {
       <MyHeader
         title="SET"
         leftPress={() => props.navigation.pop()}
-        rightPress={scrollToIndex}
+        rightPress={() => deleteCard(props.cardSet.id)}
       />
       {!loaded && <Loading />}
       <ModalMessage
@@ -299,7 +297,7 @@ const MyHeader = ({ title, leftPress, rightPress }) => {
       rightComponent={() => (
         <IconButton
           color="#fff"
-          icon={require("../../assets/icon/more_hor/more_hor.png")}
+          icon={require("../../assets/icon/delete/delete.png")}
           onPress={rightPress}
         />
       )}

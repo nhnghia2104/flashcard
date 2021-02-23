@@ -43,7 +43,7 @@ function LearnCard(props) {
       } else {
         card.push(...card);
         setCardList(card);
-        setStatus("end");
+        setStatus("start");
       }
     }
     setModalIncorrectVisible(false);
@@ -127,7 +127,7 @@ function LearnCard(props) {
         borderWidth={0}
         useNativeDriver={true}
         width={null}
-        color="#27AE60"
+        color="#7098DA"
       />
 
       {status == "loading" && <Loading />}

@@ -9,13 +9,14 @@ class CardSetService {
       if (setCards.length > 0) {
         return;
       }
-      // var defaultTestData = require("../testData.json");
-      fetch("http://www.json-generator.com/api/json/get/bPdmJeqztu?indent=2", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((json) => this.initDefaultData(json))
-        .catch((error) => console.log(error));
+      var defaultTestData = require("../testData.json");
+      // fetch("http://www.json-generator.com/api/json/get/bPdmJeqztu?indent=2", {
+      //   method: "GET",
+      // })
+      //   .then((response) => response.json())
+      //   .then((json) => this.initDefaultData(json))
+      //   .catch((error) => console.log(error));
+      this.initDefaultData(defaultTestData);
     } finally {
       context.close();
     }
