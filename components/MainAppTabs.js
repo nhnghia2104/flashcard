@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import DetailScreen from "./Details/DetailsScreen";
 import AddNewCardSetScreen from "./AddNewCardSetScreen";
 import HomeStackScreen from "./Home/HomeStackScreen";
-import TrueOrFalseCard from "./Learn/TrueOrFalseCard";
+import SearchScreen from "./SearchScreen";
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const DetailStack = createStackNavigator();
@@ -68,7 +68,7 @@ function MainAppTabs() {
       />
       <Tab.Screen
         name="Huhu"
-        component={TrueOrFalseCard}
+        component={SearchScreen}
         options={{
           tabBarLabel: "",
           tabBarColor: "#6EB6FF",

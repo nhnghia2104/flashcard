@@ -115,7 +115,15 @@ export function increaseCardPointInCardSet(idCardSet, idCard) {
     dispatch(getAllCardSet());
   };
 }
-
+export function updatePointForListCard(idCardSet, arrCardIndex) {
+  return (dispatch: any) => {
+    service.updatePointForListCard(idCardSet, arrCardIndex);
+    dispatch({
+      type: "CARD_UPDATE_POINT_ARRAY_CARD",
+    });
+    dispatch(getAllCardSet());
+  };
+}
 export function gotCard(idCardSet, idCard) {
   return (dispatch: any) => {
     service.gotCard(idCardSet, idCard);

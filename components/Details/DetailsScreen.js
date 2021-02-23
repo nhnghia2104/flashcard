@@ -11,6 +11,7 @@ import {
   Animated,
   Image,
   ActivityIndicator,
+  Modal,
 } from "react-native";
 import { Header, Button, registerCustomIconType } from "react-native-elements";
 import { connect } from "react-redux";
@@ -23,13 +24,15 @@ import {
 import { IconButton } from "react-native-paper";
 import type { CardSet } from "../../model/CardSet";
 import FlipCard from "react-native-flip-card";
-import ProgressBar from "react-native-progress/Bar";
-import * as Animatable from "react-native-animatable";
+import ProgressPie from "react-native-progress/Pie";
+// import * as Animatable from "react-native-animatable";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import LinearGradient from "react-native-linear-gradient";
 import { call } from "react-native-reanimated";
 import EditNameArea from "./EditNameArea";
 import Loading from "../Loading";
+import ModalMessage from "../ModalMessage";
+import { Pressable } from "react-native";
 type Props = {
   navigator: any,
   dispatch: any,
@@ -40,7 +43,9 @@ type Props = {
 const DetailsScreen = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [firstChange, setFirstChange] = useState(true);
-
+  const [modalMessageVisible, setModalMessageVisible] = useState(false);
+  const [message, setMessage] = useState("");
+  const [titleMessage, setTitleMessage] = useState("");
   const [nameCard, setNameCard] = useState("");
   const _flatListFlipCard = React.createRef();
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -70,7 +75,20 @@ const DetailsScreen = (props) => {
   );
 
   const renderListCard = useCallback(({ item, index }) => (
-    <CardItem item={item} index={index} props={props} />
+    <CardItem
+      item={item}
+      index={index}
+      idCardSet={props.cardSet.id}
+      handleRemove={(index) =>
+        props.dispatch(removeCardInCardSet(props.cardSet.id, index))
+      }
+      onPress={() =>
+        props.navigation.push("EditCardSet", {
+          idCardSet: props.cardSet.id,
+          index: index,
+        })
+      }
+    />
   ));
   const keyExtractorListCardItem = useCallback((item, index) =>
     index.toString()
@@ -112,6 +130,20 @@ const DetailsScreen = (props) => {
   const handleZoom = (index) => {
     props.navigation.push("ZoomScreen", { idCardSet: props.cardSet.id });
   };
+  const handleLearn = () => {
+    if (props.cardSet.cards.filter((x) => x.point < 3).length < 2) {
+      showMessage(null, "You need at least 2 cards for studying");
+    } else {
+      props.navigation.push("LearnCard", {
+        idCardSet: props.cardSet.id,
+      });
+    }
+  };
+  const showMessage = (title, message) => {
+    setTitleMessage(title);
+    setMessage(message);
+    setModalMessageVisible(true);
+  };
   const changeName = (name) => {
     console.log(name);
     props.dispatch(updateCardSetName(props.cardSet.id, name));
@@ -125,6 +157,11 @@ const DetailsScreen = (props) => {
         rightPress={scrollToIndex}
       />
       {!loaded && <Loading />}
+      <ModalMessage
+        visible={modalMessageVisible}
+        message={message}
+        onPress={() => setModalMessageVisible(!modalMessageVisible)}
+      />
       {loaded && props.cardSet && (
         <FlatList
           ListHeaderComponent={
@@ -199,11 +236,7 @@ const DetailsScreen = (props) => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.buttonContainer]}
-                    onPress={() =>
-                      props.navigation.push("LearnCard", {
-                        idCardSet: props.cardSet.id,
-                      })
-                    }
+                    onPress={handleLearn}
                   >
                     <Image
                       style={styles.icon}
@@ -273,12 +306,12 @@ const MyHeader = ({ title, leftPress, rightPress }) => {
     />
   );
 };
-const CardItem = ({ item, index, props }) => {
+const CardItem = ({ item, index, idCardSet, handleRemove, onPress }) => {
   const _swipe = useRef(null);
 
   const removeAction = (index) => {
     _swipe.current.close();
-    props.dispatch(removeCardInCardSet(props.cardSet.id, index));
+    handleRemove(index);
   };
   const swipeAction = (index) => {
     return (
@@ -292,24 +325,35 @@ const CardItem = ({ item, index, props }) => {
       </TouchableOpacity>
     );
   };
+  const progress = item.point / 3;
   return (
-    <TouchableOpacity
-      onPress={() =>
-        props.navigation.push("EditCardSet", {
-          idCardSet: props.cardSet.id,
-          index: index,
-        })
-      }
-      activeOpacity={1}
-    >
+    <TouchableOpacity onPress={onPress} activeOpacity={1}>
       <Swipeable
         overshootRight={false}
         renderRightActions={() => swipeAction(index)}
         ref={_swipe}
       >
         <View style={styles.item}>
-          <Text style={styles.textTerm}>{item.data.front.text}</Text>
-          <Text style={styles.textDefinition}>{item.data.back.text}</Text>
+          <View style={{ width: "88%" }}>
+            <Text style={styles.textTerm}>{item.data.front.text}</Text>
+            <Text style={styles.textDefinition}>{item.data.back.text}</Text>
+          </View>
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            {progress < 1 && progress != 0 && (
+              <ProgressPie
+                color="#7098DA"
+                progress={progress}
+                size={30}
+                borderWidth={3}
+              />
+            )}
+            {progress == 1 && (
+              <Image
+                style={{ tintColor: "#7098DA", width: 30, height: 30 }}
+                source={require("../../assets/icon/check_outline/check.png")}
+              />
+            )}
+          </View>
         </View>
       </Swipeable>
     </TouchableOpacity>
@@ -406,7 +450,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     paddingTop: 0,
-    borderRadius: 3,
+    borderRadius: 10,
   },
   flipCardArea: {
     minHeight: height * 0.35,
@@ -420,7 +464,7 @@ const styles = StyleSheet.create({
   },
   card: {
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -434,7 +478,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 14,
-    color: "#333333",
+    color: "#7098DA",
     alignSelf: "center",
     fontWeight: "bold",
   },
@@ -442,20 +486,22 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
 
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 12,
     marginHorizontal: "auto",
-    borderBottomWidth: 5,
-    borderColor: "#6EB6FF",
+    // borderBottomWidth: 5,
+    // borderColor: "#6EB6FF",
     width: "47%",
+    borderRadius: 10,
     // flex: 1,
   },
   actionGroup: {
@@ -480,6 +526,7 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderBottomWidth: 0.5,
     borderTopWidth: 0.5,
+    flexDirection: "row",
   },
   textTerm: {
     color: "#333333",
@@ -534,7 +581,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 40,
     height: 40,
-    tintColor: "#7098da",
+    tintColor: "#85a8e0",
     marginBottom: 5,
   },
 });

@@ -46,6 +46,9 @@ export default function cardReducer(
     case "CARD_GOT": {
       return { ...state, data: action.data };
     }
+    case "CARD_UPDATE_POINT_ARRAY_CARD": {
+      return { ...state, data: action.data };
+    }
   }
   return state;
 }

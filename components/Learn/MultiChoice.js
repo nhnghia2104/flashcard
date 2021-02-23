@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
@@ -31,6 +32,10 @@ function MultiChoice({ cardSet, handleAnswer, currentCardIndex }) {
               <Text style={styles.textQuestion}>
                 {cardSet.cards[currentCardIndex].data.front.text}
               </Text>
+              <Image
+                style={styles.icon}
+                source={require("../../assets/icon/question/question.png")}
+              />
             </View>
           </View>
           <View style={styles.answer}>
@@ -206,6 +211,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+  },
+  icon: {
+    position: "absolute",
+    transform: [{ rotate: "25deg" }],
+    tintColor: "#FFDB6C",
+    right: -10,
+    top: -15,
+    width: 36,
+    height: 36,
   },
 });
 const selector = (store, props) => {

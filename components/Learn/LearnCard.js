@@ -13,10 +13,12 @@ import {
 import { IconButton } from "react-native-paper";
 import { Header, Overlay } from "react-native-elements";
 import { connect } from "react-redux";
-import { increaseCardPointInCardSet } from "../../actions/CardSet";
-
+import { updatePointForListCard } from "../../actions/CardSet";
+import ProgressBar from "react-native-progress/Bar";
 import MultiChoice from "./MultiChoice";
 import Loading from "../Loading";
+import StartLearn from "./StartLearn";
+import EndLearn from "./EndLearn";
 function LearnCard(props) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [cardList, setCardList] = useState([]);
@@ -29,28 +31,35 @@ function LearnCard(props) {
     picked: "",
   });
   const [flatList, setFlatList] = useState(null);
+  const [listCardCorrect, setListCardCorrect] = useState([]);
+  const [progress, setProgress] = useState(0);
 
-  function checkPoint(card) {
-    return card.point < 2;
-  }
   useEffect(() => {
     if (props.cardSet) {
       var card = props.cardSet.cards.filter(checkPoint).slice(0, 5);
       console.log(card);
-      setCardList(card);
-      if (card[currentCardIndex].got == false) {
-        setStatus("learn");
+      if (!card.length) {
+        console.log("non");
+      } else {
+        card.push(...card);
+        setCardList(card);
+        setStatus("end");
       }
     }
     setModalIncorrectVisible(false);
     setModalCorrectVisible(false);
   }, []);
+  function checkPoint(card) {
+    return card.point < 3;
+  }
   const handleAnswer = (isAnswer, index) => {
     if (isAnswer) {
       setModalCorrectVisible(true);
       setTimeout(function () {
         goNext();
       }, 1000);
+      setListCardCorrect((old) => [...old, index]);
+      console.log(listCardCorrect);
     } else {
       setIncorrectInfo({
         question: cardList[currentCardIndex].data.front.text,
@@ -58,12 +67,13 @@ function LearnCard(props) {
         picked: props.cardSet.cards[index].data.back.text,
       });
       setModalIncorrectVisible(true);
-      // console.log(index);
     }
   };
+
   const goNext = () => {
     setModalCorrectVisible(false);
     setModalIncorrectVisible(false);
+    setProgress((currentCardIndex + 1) / cardList.length);
     if (canGoNext()) {
       flatList.scrollToIndex({
         animated: true,
@@ -71,12 +81,23 @@ function LearnCard(props) {
         viewPosition: 0.5,
       });
       setCurrentCardIndex(currentCardIndex + 1);
+    } else {
+      setStatus("end");
     }
   };
   const canGoNext = () => {
     return currentCardIndex < cardList.length - 1;
   };
+  const popScreen = () => {
+    if (listCardCorrect.length && cardList.length) {
+      if (status != "end") {
+        setStatus("end");
+      }
+      props.dispatch(updatePointForListCard(props.cardSet.id, listCardCorrect));
+    }
 
+    props.navigation.pop();
+  };
   const renderItem = useCallback(({ index, item }) => {
     return (
       <View style={styles.content}>
@@ -97,12 +118,21 @@ function LearnCard(props) {
     <View style={styles.container}>
       <MyHeader
         title="LEARN"
-        leftPress={() => props.navigation.pop()}
+        leftPress={popScreen}
         rightPress={() => console.log("Pressed right")}
+      />
+      <ProgressBar
+        style={{ width: "100%", borderRadius: 0 }}
+        progress={progress}
+        borderWidth={0}
+        useNativeDriver={true}
+        width={null}
+        color="#27AE60"
       />
 
       {status == "loading" && <Loading />}
-      {status != "loading" && (
+      {status == "start" && <StartLearn onPress={() => setStatus("learn")} />}
+      {status == "learn" && (
         <FlatList
           ref={(ref) => setFlatList(ref)}
           data={cardList}
@@ -121,6 +151,9 @@ function LearnCard(props) {
           scrollEnabled={false}
         />
       )}
+      {status == "end" && (
+        <EndLearn total={cardList.length} correct={listCardCorrect.length} />
+      )}
       <ModalCorrect visible={modalCorrectVisible} />
       <ModalIncorrect
         visible={modalIncorrectVisible}
@@ -134,12 +167,12 @@ function LearnCard(props) {
 const MyHeader = ({ leftPress, rightPress, title }) => {
   return (
     <Header
-      barStyle="light-content"
-      backgroundColor="#7098da"
+      barStyle="dark-content"
+      backgroundColor="#fff"
       containerStyle={styles.headerContainer}
       leftComponent={() => (
         <IconButton
-          color="#fff"
+          color="#4f4f4f"
           icon={require("../../assets/icon/close/close.png")}
           onPress={leftPress}
         />

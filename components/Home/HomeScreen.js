@@ -57,14 +57,14 @@ class HomeScreen extends Component {
               {item.cards.length} {item.cards.length > 1 ? "cards" : "card"}
             </Text>
           </View>
-          <View style={styles.cardButtonArea}>
+          {/* <View style={styles.cardButtonArea}>
             <IconButton
               icon={require("../../assets/icon/more_vert/more_vert_black.png")}
               color={"#4F4F4F"}
               size={24}
               onPress={() => this.props.dispatch(deleteCardSet(item.id))}
             />
-          </View>
+          </View> */}
         </View>
       </TouchableOpacity>
     );
@@ -73,12 +73,6 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Header
-          // ViewComponent={LinearGradient}
-          // linearGradientProps={{
-          //   colors: ["#7098da", "#6EB6FF"],
-          //   start: { x: 0, y: 0.3 },
-          //   end: { x: 0, y: 1 },
-          // }}
           backgroundColor="#7098da"
           containerStyle={{
             borderBottomColor: "#7098da",
@@ -90,10 +84,10 @@ class HomeScreen extends Component {
               Home
             </Text>
           )}
-          rightComponent={() => (
+          leftComponent={() => (
             <IconButton
               color="#fff"
-              icon={require("../../assets/icon/more_hor/more_hor.png")}
+              icon={require("../../assets/icon/bell/bell.png")}
               onPress={() => console.log("pressed right")}
             />
           )}
@@ -101,27 +95,13 @@ class HomeScreen extends Component {
         <FlatList
           ListHeaderComponent={
             <>
-              <Text
-                style={{
-                  marginTop: 20,
-                  marginLeft: 20,
-                  fontSize: 16,
-                  fontWeight: "bold",
-                  color: "#333333",
-                }}
-              >
-                Sets
-              </Text>
+              <Text style={styles.textHeaderFlatList}>Sets</Text>
             </>
           }
           data={this.props.setCards.sort((a, b) => a.lastAccess < b.lastAccess)}
           renderItem={this.renderItem}
           keyExtractor={(item, index) => index.toString()}
-          style={{
-            paddingBottom: 20,
-            paddingTop: 0,
-            backgroundColor: "#fff",
-          }}
+          style={styles.flatList}
         />
       </View>
     );
@@ -133,7 +113,19 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f2f2f2",
+  },
+  textHeaderFlatList: {
+    marginTop: 20,
+    marginLeft: 20,
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#4f4f4f",
+  },
+  flatList: {
+    paddingBottom: 20,
+    paddingTop: 0,
+    backgroundColor: "#f2f2f2",
   },
   headerTitleStyle: {
     textAlign: "center",
@@ -152,17 +144,17 @@ const styles = StyleSheet.create({
     // backgroundColor: "rgba(110, 182, 255, 0.3)",
     backgroundColor: "#fff",
     padding: 15,
-    borderRadius: 3,
+    borderRadius: 10,
     // shadow
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1.41,
 
-    elevation: 2,
+    // elevation: 2,
   },
   cardTitle: {
     fontWeight: "700",

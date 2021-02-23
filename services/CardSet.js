@@ -254,6 +254,21 @@ class CardSetService {
     }
   }
 
+  updatePointForListCard(idCardSet, arrCardIndex) {
+    let context = realm.current();
+    try {
+      let setCards = context.objects("CardSet").filtered(`id = "${idCardSet}"`);
+      if (!setCards.length) return;
+      context.write(() => {
+        arrCardIndex.forEach((element) => {
+          setCards[0].cards[element].point += 1;
+        });
+      });
+    } finally {
+      context.close();
+    }
+  }
+
   gotCard(idCardSet, idCard) {
     let context = realm.current();
     try {

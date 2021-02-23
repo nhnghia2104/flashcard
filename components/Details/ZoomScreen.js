@@ -105,11 +105,12 @@ const MyHeader = ({ data, leftPress, rightPress, scrollX, loaded }) => {
         </View>
       )}
       rightComponent={() => (
-        <IconButton
-          color="#4F4F4F"
-          icon={require("../../assets/icon/more_hor/more_hor.png")}
-          onPress={() => console.log("pressed right")}
-        />
+        // <IconButton
+        //   color="#4F4F4F"
+        //   icon={require("../../assets/icon/more_hor/more_hor.png")}
+        //   onPress={() => console.log("pressed right")}
+        // />
+        <View></View>
       )}
     />
   );
