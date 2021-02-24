@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Dimensions,
 } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Header } from "react-native-elements";
@@ -26,7 +27,7 @@ function MultiChoice({ cardSet, handleAnswer, currentCardIndex }) {
   return (
     <>
       {cardSet && (
-        <>
+        <View style={styles.container}>
           <View style={styles.question}>
             <View style={styles.card}>
               <Text style={styles.textQuestion}>
@@ -38,21 +39,19 @@ function MultiChoice({ cardSet, handleAnswer, currentCardIndex }) {
               />
             </View>
           </View>
-          <View style={styles.answer}>
+          <ScrollView scrollEnabled style={styles.answer}>
             <Text style={styles.answerHeader}>Choose the best answer</Text>
-            <ScrollView>
-              {arrayIndex.map((item, index) => (
-                <AnswerOption
-                  key={index}
-                  index={index}
-                  text={cardSet.cards[item].data.back.text}
-                  isAnswer={item == currentCardIndex}
-                  onPress={(isAnswer) => handleAnswer(isAnswer, item)}
-                />
-              ))}
-            </ScrollView>
-          </View>
-        </>
+            {arrayIndex.map((item, index) => (
+              <AnswerOption
+                key={index}
+                index={index}
+                text={cardSet.cards[item].data.back.text}
+                isAnswer={item == currentCardIndex}
+                onPress={(isAnswer) => handleAnswer(isAnswer, item)}
+              />
+            ))}
+          </ScrollView>
+        </View>
       )}
     </>
   );
@@ -88,41 +87,6 @@ function shuffle(array) {
   return array;
 }
 
-const MyHeader = ({ leftPress, rightPress, title }) => {
-  return (
-    <Header
-      barStyle="light-content"
-      backgroundColor="#7098da"
-      containerStyle={{
-        borderBottomColor: "#7098da",
-        borderBottomWidth: 0,
-        zIndex: 1000,
-      }}
-      leftComponent={() => (
-        <IconButton
-          color="#fff"
-          icon={require("../../assets/icon/ios_back/ios_back.png")}
-          onPress={leftPress}
-        />
-      )}
-      centerComponent={() => (
-        <Text
-          numberOfLines={1}
-          style={{
-            textAlign: "center",
-            color: "#fff",
-            fontSize: 16,
-            height: "100%",
-            textAlignVertical: "center",
-            flex: 1,
-          }}
-        >
-          {title}
-        </Text>
-      )}
-    />
-  );
-};
 const AnswerOption = ({ index, text, onPress, isAnswer }) => {
   const [backgroundColor, setBackgroundColor] = useState("#fff");
   const [selected, setSelected] = useState(false);
@@ -155,6 +119,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingBottom:
+      (Dimensions.get("screen").height - Dimensions.get("window").height) * 2,
   },
   card: {
     flex: 1,
@@ -172,7 +138,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   question: {
-    flex: 1,
+    height: "34%",
     justifyContent: "center",
     alignContent: "center",
   },
@@ -182,7 +148,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   answer: {
-    flex: 2,
+    height: "66%",
+    overflow: "scroll",
   },
   textAnswer: {
     fontSize: 15,

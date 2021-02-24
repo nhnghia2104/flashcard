@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "name": "TOEIC 01",
+    "name": "Example",
     "isStarred": false,
     "lastAccess": 1611681227829,
     "dateCreated": 1611681227829,
@@ -13,11 +13,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Contracts",
+            "text": "Campsite",
             "imageURL": ""
           },
           "back": {
-            "text": "Hợp đồng, giao kèo, khế ước, giấy ký kết",
+            "text": "A place where people can put up a tent",
             "imageURL": ""
           }
         }
@@ -28,11 +28,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Marketing",
+            "text": "Dessert",
             "imageURL": ""
           },
           "back": {
-            "text": "Thị trường, nơi tiêu thụ; khách hàng",
+            "text": "Sweet food eaten after the main part of a meal",
             "imageURL": ""
           }
         }
@@ -43,11 +43,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Warranties",
+            "text": "Accommodation",
             "imageURL": ""
           },
           "back": {
-            "text": "Bảo hành, sự bảo đảm",
+            "text": "A place (such as a room in a hotel) where travelers can sleep and find other services",
             "imageURL": ""
           }
         }
@@ -58,11 +58,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Business planning",
+            "text": "Announcement",
             "imageURL": ""
           },
           "back": {
-            "text": "Tổ chức kế hoạch công sở",
+            "text": "A written or spoken statement that tells people about something :public or formal words that announce something",
             "imageURL": ""
           }
         }
@@ -73,11 +73,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Conferences ",
+            "text": "Souvenir",
             "imageURL": ""
           },
           "back": {
-            "text": "Hội nghị, cuộc gặp mặt",
+            "text": "Something that is kept as a reminder of a place you have visited, an event you have been to, etc.",
             "imageURL": ""
           }
         }
@@ -88,11 +88,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Computers",
+            "text": "Crossroads",
             "imageURL": ""
           },
           "back": {
-            "text": "Máy tính",
+            "text": "A place where two or more roads cross",
             "imageURL": ""
           }
         }
@@ -103,11 +103,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Office Technology",
+            "text": "Guidebook",
             "imageURL": ""
           },
           "back": {
-            "text": "Vấn đề kĩ thuật trong công ty",
+            "text": "A book of information for travelers",
             "imageURL": ""
           }
         }
@@ -118,11 +118,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Job Advertising and Recruiting",
+            "text": "Passport",
             "imageURL": ""
           },
           "back": {
-            "text": "Quảng cáo công việc, tuyển dụng",
+            "text": "An official document issued by the government of a country that identifies someone as a citizen of that country and that is usually necessary when entering or leaving a country",
             "imageURL": ""
           }
         }
@@ -133,11 +133,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Applying and Interviewing",
+            "text": "Signpost",
             "imageURL": ""
           },
           "back": {
-            "text": "Nộp đơn xin việc, phỏng vấn",
+            "text": "A sign beside a road showing the direction and distance to a place",
             "imageURL": ""
           }
         }
@@ -148,171 +148,11 @@
         "got":false,
         "data": {
           "front": {
-            "text": "Salaries and benefits",
+            "text": "Departure",
             "imageURL": ""
           },
           "back": {
-            "text": "Lương bổng và lợi ích",
-            "imageURL": ""
-          }
-        }
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "name": "IELTS 01",
-    "isStarred": false,
-    "lastAccess": 1611681227829,
-    "dateCreated": 1611681227829,
-    "lastIndex" : 0,
-    "cards": [
-      {
-        "id": "C1",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "abandon",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "bỏ, từ bỏ",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C2",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "abandoned",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "bị bỏ rơi, bị ruồng bỏ",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C3",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "able",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "có năng lực, có tài",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C4",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "absence",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "sự vắng mặt",
-            "imageURL": ""
-          }
-        }
-      },
-   {
-        "id": "C5",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "academic",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "thuộc học viện, ĐH, viện hàn lâm",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C6",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "accidental",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "tình cờ, bất ngờ",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C7",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "accuse",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "tố cáo, buộc tội, kết tội",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C8",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "achieve",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "đạt được, dành được",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C9",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "advertising",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "sự quảng cáo, nghề quảng cáo",
-            "imageURL": ""
-          }
-        }
-      },
-      {
-        "id": "C10",
-        "point": 0,
-        "got":false,
-        "data": {
-          "front": {
-            "text": "alarming",
-            "imageURL": ""
-          },
-          "back": {
-            "text": "làm lo sợ, làm hốt hoảng, làm sợ hãi",
+            "text": "The act of leaving a place especially to start a journey",
             "imageURL": ""
           }
         }
