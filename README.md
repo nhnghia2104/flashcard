@@ -16,7 +16,7 @@ I want to learn how to make apps using React Native. Instead of inventing an app
 ## Clone & install
 
 + Clone this repo `git clone https://github.com/nhnghia2104/flashcard-react-native.git`
-+ `cd flashcard`
++ `cd flashcard-react-native`
 + run `npm install`
 
 ## iOS
